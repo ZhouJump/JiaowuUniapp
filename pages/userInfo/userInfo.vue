@@ -1,13 +1,16 @@
 <template>
 	<view>
 		<view class="topbox">
-			<view v-if="loginstate != 'logout'" class="namebox">粥粥粥菌<i class="bi bi-caret-right-fill"></i></view>
+			<view v-if="loginstate != 'logout'" class="namebox">{{name}}<i class="bi bi-caret-right-fill"></i></view>
 			<view v-if="loginstate == 'logout'" @click="gotologin" class="namebox">立即登录<i class="bi bi-caret-right-fill"></i></view>
-			<view v-if="loginstate != 'logout'" class="schoolnamebox">莆田学院</view>
-			<view class="avtarbox"></view>
+			<view v-if="loginstate != 'logout'" class="schoolnamebox">{{xueyuan}}</view>
+			<view class="avtarbox"><i class="bi bi-person-fill"></i></view>
 		</view>
 		<view class="infobox">
-			
+			<view v-if="loginstate != 'logout'">学号:{{id}}</view>
+			<view v-if="loginstate != 'logout'">专业:{{zy}}</view>
+			<view v-if="loginstate != 'logout'">方向:{{fx}}</view>
+			<i v-if="loginstate == 'offline'" @click="gotologin" class="bi bi-arrow-clockwise refresh"></i>
 		</view>
 		<view v-if="loginstate == 'online'" class="quitbutton">退出登录</view>
 	</view>
@@ -21,6 +24,9 @@
 				loginstate:localStorage.getItem('loginstate'),
 				name:localStorage.getItem('username'),
 				xueyuan:localStorage.getItem('userxueyuan'),
+				id:localStorage.getItem('userid'),
+				fx:localStorage.getItem('userfx'),
+				zy:localStorage.getItem('userzy'),
 			}
 		},
 		methods: {
@@ -47,10 +53,16 @@
 							  console.log(res.data.items[0])
 							  this.name = res.data.items[0].xm
 							  this.xueyuan = res.data.items[0].zsxymc
+							  this.id = res.data.items[0].xh
+							  this.fx = res.data.items[0].zyfxmc
+							  this.zy = res.data.items[0].zymc
 						  }
 						  localStorage.setItem('loginstate',this.loginstate)
 						  localStorage.setItem('username',this.name)
-						  localStorage.setItem('userxueyuan',this.name)
+						  localStorage.setItem('userxueyuan',this.xueyuan)
+						  localStorage.setItem('userid',this.id)
+						  localStorage.setItem('userfx',this.fx)
+						  localStorage.setItem('userzy',this.zy)
 					}
 				})
 			}
@@ -94,17 +106,27 @@
 		border-radius: 40px;
 		right: 40px;
 		bottom: 30%;
+		text-align: center;
+		line-height: 80px;
+		color: lightgray;
+		font-size: 50px;
 	}
 	.infobox
 	{
 		background-color: white;
 		box-shadow: 0 0 6px lightgray;
 		width: calc(100% - 40px);
-		height: 120px;
+		height: 100px;
 		left: 20px;
 		border-radius: 8px;
 		top:180px;
 		position: absolute;
+		box-sizing: border-box;
+		padding: 16px;
+	}
+	.infobox view{
+		font-size: 14px;
+		margin: 2px;
 	}
 	.quitbutton
 	{
@@ -118,5 +140,19 @@
 		border-radius: 25px;
 		background-color: #f1f1f1;
 		color: palevioletred;
+	}
+	.refresh
+	{
+		font-size: 30px;
+		background: blue;
+		width: 40px;
+		height: 40px;
+		display: block;
+		color: white;
+		text-align: center;
+		line-height: 40px;
+		border-radius: 20px;
+		position: absolute;
+		right: 20px;
 	}
 </style>

@@ -68,6 +68,20 @@
     "uniStatistics" : {
         "enable" : false
     },
+	"h5": 
+	{
+	        "devServer": {
+	            "proxy": {
+	                "/prefix/api/user/list": {
+	                    "target": "http://edu.zhoujump.club",
+	                    "pathRewrite": {
+	                        "^/prefix": ""
+	                    }
+	                }
+	            }
+	        }
+	    },
+
 
     "vueVersion" : "3"
 }
