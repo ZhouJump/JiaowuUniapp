@@ -19,7 +19,8 @@
 		data() {
 			return {
 				loginstate:localStorage.getItem('loginstate'),
-				
+				name:localStorage.getItem('username'),
+				xueyuan:localStorage.getItem('userxueyuan'),
 			}
 		},
 		methods: {
@@ -43,8 +44,13 @@
 					  else
 						  {
 							  this.loginstate = 'online'
+							  console.log(res.data.items[0])
+							  this.name = res.data.items[0].xm
+							  this.xueyuan = res.data.items[0].zsxymc
 						  }
 						  localStorage.setItem('loginstate',this.loginstate)
+						  localStorage.setItem('username',this.name)
+						  localStorage.setItem('userxueyuan',this.name)
 					}
 				})
 			}

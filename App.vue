@@ -16,5 +16,6 @@
 </script>
 
 <style>
+	page{height: 100% !important}
 	/*每个页面公共css */
 </style>
