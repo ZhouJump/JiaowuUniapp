@@ -12,9 +12,9 @@
 			}
 		},
 		methods: {
-			
+		
+		},
 		}
-	}
 </script>
 
 <style>

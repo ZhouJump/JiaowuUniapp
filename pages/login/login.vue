@@ -1,7 +1,6 @@
 <template>
 	<view>
-		apps
-		<i class="bi-alarm"></i>
+		
 	</view>
 </template>
 
@@ -19,7 +18,5 @@
 </script>
 
 <style>
-	page{
-	height: 100%!important;
-	}
+
 </style>
