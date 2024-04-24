@@ -9,7 +9,7 @@
 	export default {
 		data() {
 			return {
-				week:base.getWeek()
+				week:20
 			}
 		},
 		methods: {
