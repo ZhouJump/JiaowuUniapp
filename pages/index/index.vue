@@ -27,7 +27,7 @@
 		onLoad() {
 
 		},
-		methods: {
+		methods: {	
 
 		}
 	}

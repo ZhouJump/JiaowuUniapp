@@ -21,7 +21,7 @@
 				  {name:'成绩单',ico:'bi-clipboard-data-fill',url:'chengji',color:'#29c25c'},
 				  {name:'查空教室',ico:'bi-building-fill-check',url:'jiaoshi',color:'#e6cd3e'},
 				  {name:'下载app',ico:'bi-arrow-down-circle-fill',url:'xiazai',color:'#4CAAE4'},
-				  {name:'商务合作',ico:'bi-piggy-bank-fill',url:'hezuo',color:'#ff9300'},
+				  // {name:'商务合作',ico:'bi-piggy-bank-fill',url:'hezuo',color:'#ff9300'},
 				  {name:'考场查询',ico:'bi-newspaper',url:'kaoshi',color:'#EFC3CA'},
 				  {name:'进制计算器',ico:'bi-calculator-fill',url:'jisuanqi',color:'#39D0D5'},
 						],
@@ -79,7 +79,7 @@
 	}
 	.appitem{
 		height: 100px;
-		width: 22%;
+		width: 30%;
 		margin-top: 6px;
 		margin-left: 1.5%;
 		margin-right: 1.5%;

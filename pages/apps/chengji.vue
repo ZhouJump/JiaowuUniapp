@@ -4,27 +4,163 @@
 			<view class="title">成绩查询<i class="bi bi-caret-right-fill"></i></view>
 		</view>
 		<view class="appbox">
-			
+			<view :style="{color:item.cj<60?'red':''}" class="item" v-for="item in chengji">
+				<view class="kcmc">{{item.kcmc}}</view>
+				<view class="cj">{{item.cj}}<text class="sub">{{item.ksxz=='重修补考'?'(重)':''}}</text></view>
+			</view>
 		</view>
 		<view class="tip" v-if="chengji == undefined">点击获取数据<i class="bi bi-arrow-right"></i></view>
-		<i class="bi bi-arrow-clockwise refresh"></i>
+		<i @click="ispop=true" class="bi bi-arrow-clockwise refresh"></i>
+		
+		<!-- 弹出框 -->
+		<view @click="ispop = false" v-if="ispop" class="mask"></view>
+		<view :style="{bottom:ispop?'0':'-310px'}" class="popup">
+			<select title="2023" v-model="year">
+				<option value="2023">2023-2024</option>
+				<option value="2022">2022-2023</option>
+				<option value="2021">2021-2022</option>
+				<option value="2020">2020-2021</option>
+			</select>
+			<select title="3" v-model="tern">
+				<option value="3">学期一</option>
+				<option value="12">学期二</option>
+				<option value="16">学期三</option>
+			</select>
+			<div class="buttonbox">
+				<div @click="get" style="background-color: #8d89ff;color: white;" class="button">查询</div>
+				<div @click="ispop=false" class="button">取消</div>
+			</div>
+		</view>
+		<!-- 弹出框结束 -->
 	</view>
 </template>
 
 <script>
+import base from '../../common/base'
 	export default {
 		data() {
 			return {
-				chengji:localStorage.getItem('chengji')
+				chengji:JSON.parse(localStorage.getItem('chengji')),
+				isload:false,
+				ispop:false,
+				tern:'3',
+				year:'2023'
 			}
 		},
 		methods: {
-			
+			get()
+			{
+				if(this.isload)return
+				
+				this.isload = true
+				uni.request({
+					url:base.baseUrl +'cjcx/cjcx_cxXsgrcj.html?doType=query&xnm='+this.year+'&xqm='+this.tern,
+					success: (res) => {
+						 if(res.data.length != undefined)
+							  {
+								  uni.navigateTo({
+								  	url:"/pages/login/login"
+								  })
+								return
+							  }
+						  console.log(res.data.items)
+						  var list = []
+						  res.data.items.forEach(element => {
+							list.push({kcmc:element.kcmc,ksxz:element.ksxz,cj:element.bfzcj})
+						  });
+						  console.log(list)
+						  this.chengji = list
+						  localStorage.setItem('chengji',JSON.stringify(list))
+						  this.isload = false
+						  this.ispop = false
+
+					}
+				})
+			}
 		}
 	}
 </script>
 
 <style>
+	.mask
+	{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+		background: black;
+		opacity: 0.2;
+	}
+	.sub
+	{
+		font-size: 16px;
+	}
+	.cj
+	{
+		height: 40px;
+		line-height: 40px;
+		font-size: 30px;
+		padding-left: 30px;
+	}
+	.kcmc
+	{
+		height: 40px;
+		line-height: 40px;
+		height: 40px;
+		padding-left: 24px;
+	}
+	.item
+	{
+		width: 100%;
+		border-top: solid lightgray 1px;
+		border-bottom: solid lightgray 1px;
+		box-sizing: border-box;
+		margin-top: -1px;
+		height: 90px;
+	}
+	select
+	{
+		width: 98%;
+		position: relative;
+		left: 1%;
+		height: 40px;
+		border-radius: 8px;
+		border: 1px lightgray solid;
+		margin-top: 12px;
+		padding-left: 24px;
+	}
+	.buttonbox
+	{
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 46px;
+		left: 0;
+	}
+	.button
+	{
+		width: 48%;
+		background-color: lightgray;
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+		border-radius: 8px;
+	}
+	.popup
+	{
+		position: absolute;
+		width: 100%;
+		height: 300px;
+		background-color: white;
+		bottom: 0;
+		box-shadow: 0 0 8px gray;
+		border-radius: 8px;
+		transition-duration: 100ms;
+	}
 	.topbox
 	{
 		width: 100%;
@@ -54,7 +190,6 @@
 		width: calc(100% - 40px);
 		height: calc(100% - 140px);
 		left: 20px;
-		padding: 4px;
 		border-radius: 8px;
 		top:100px;
 		position: absolute;
@@ -85,5 +220,10 @@
 		bottom: 120px;
 		right: 120px;
 		font-weight: 600;
+	}
+	body
+	{
+		overflow: hidden;
+		overflow-y: hidden;
 	}
 </style>
