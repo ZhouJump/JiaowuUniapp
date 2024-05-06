@@ -10,7 +10,7 @@
 			</view>
 		</view>
 		<view class="tip" v-if="chengji == undefined">点击获取数据<i class="bi bi-arrow-right"></i></view>
-		<i @click="ispop=true" class="bi bi-arrow-clockwise refresh"></i>
+		<i @click="openpop" :style="{animationName:isload?'rotate':''}" class="bi bi-arrow-clockwise refresh"></i>
 		
 		<!-- 弹出框 -->
 		<view @click="ispop = false" v-if="ispop" class="mask"></view>
@@ -48,11 +48,16 @@ import base from '../../common/base'
 			}
 		},
 		methods: {
+			openpop()
+			{
+				this.ispop=true
+			},
 			get()
 			{
 				if(this.isload)return
 				
 				this.isload = true
+				this.ispop = false
 				uni.request({
 					url:base.baseUrl +'cjcx/cjcx_cxXsgrcj.html?doType=query&xnm='+this.year+'&xqm='+this.tern,
 					success: (res) => {
@@ -72,8 +77,6 @@ import base from '../../common/base'
 						  this.chengji = list
 						  localStorage.setItem('chengji',JSON.stringify(list))
 						  this.isload = false
-						  this.ispop = false
-
 					}
 				})
 			}
@@ -213,6 +216,8 @@ import base from '../../common/base'
 		bottom: 100px;
 		box-shadow: 0 0 6px gray;
 		opacity: 0.6;
+		animation-duration: 500ms;
+		
 	}
 	.tip{
 		position: absolute;
@@ -220,6 +225,10 @@ import base from '../../common/base'
 		bottom: 120px;
 		right: 120px;
 		font-weight: 600;
+	}
+	@keyframes rotate{
+		from{rotate: 0deg;}
+		to{rotate: 360deg;}
 	}
 	body
 	{
