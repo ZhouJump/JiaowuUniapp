@@ -15,17 +15,14 @@
 		<!-- 弹出框 -->
 		<view @click="ispop = false" v-if="ispop" class="mask"></view>
 		<view :style="{bottom:ispop?'0':'-310px'}" class="popup">
-			<select title="2023" v-model="year">
-				<option value="2023">2023-2024</option>
-				<option value="2022">2022-2023</option>
-				<option value="2021">2021-2022</option>
-				<option value="2020">2020-2021</option>
-			</select>
-			<select title="3" v-model="tern">
-				<option value="3">学期一</option>
-				<option value="12">学期二</option>
-				<option value="16">学期三</option>
-			</select>
+			<picker-view class="picker" @change="changevalue" :value="[0,0]">
+				<picker-view-column>
+					<view :key="index" v-for="(item,index) in yearlist">{{item.text}}</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view :key="index" v-for="(item,index) in ternlist">{{item.text}}</view>
+				</picker-view-column>
+			</picker-view>
 			<div class="buttonbox">
 				<div @click="get" style="background-color: #8d89ff;color: white;" class="button">查询</div>
 				<div @click="ispop=false" class="button">取消</div>
@@ -44,10 +41,24 @@ import base from '../../common/base'
 				isload:false,
 				ispop:false,
 				tern:'3',
-				year:'2023'
+				year:'2023',
+				yearlist:[
+					{text:'2023-2024',id:'2023'},
+					{text:'2022-2023',id:'2022'},
+					{text:'2021-2022',id:'2021'},
+					{text:'2020-2021',id:'2020'},],
+				ternlist:[
+					{text:'学期一',id:'3'},
+					{text:'学期二',id:'12'},
+					{text:'学期三',id:'16'},],
 			}
 		},
 		methods: {
+			changevalue(event){
+				console.log(event.detail.value)
+				this.year = this.yearlist[event.detail.value[0]].id
+				this.tern = this.ternlist[event.detail.value[1]].id
+			},
 			openpop()
 			{
 				if(this.isload==true)
@@ -59,8 +70,9 @@ import base from '../../common/base'
 				if(this.isload)return
 				this.isload = true
 				this.ispop = false
+				console.log(this.tern,this.year)
 				uni.request({
-					url:base.baseUrl +'cjcx/cjcx_cxXsgrcj.html?doType=query&xnm='+this.year+'&xqm='+this.tern,
+					url:base.baseUrl +'cjcx/cjcx_cxXsgrcj.html?doType=query&xnm='+this.year+'&xqm='+this.tern+'&queryModel.showCount=100',
 					success: (res) => {
 						 if(res.data.length != undefined)
 							  {
@@ -80,7 +92,7 @@ import base from '../../common/base'
 						  res.data.items.forEach(element => {
 							list.push({kcmc:element.kcmc,ksxz:element.ksxz,cj:element.bfzcj})
 						  });
-						  console.log(list)
+						  console.log(list,this.year,this.tern)
 						  this.chengji = list
 						  uni.setStorageSync('chengji',JSON.stringify(list))
 						  this.isload = false
@@ -140,16 +152,10 @@ import base from '../../common/base'
 		margin-top: -1px;
 		height: 90px;
 	}
-	select
-	{
-		width: 98%;
-		position: relative;
-		left: 1%;
-		height: 40px;
-		border-radius: 8px;
-		border: 1px lightgray solid;
-		margin-top: 12px;
-		padding-left: 24px;
+	.picker{
+		height: 200px;
+		width: 100%;
+		text-align: center;
 	}
 	.buttonbox
 	{
@@ -157,7 +163,7 @@ import base from '../../common/base'
 		justify-content: space-around;
 		align-items: center;
 		position: absolute;
-		bottom: 0;
+		bottom: 20px;
 		width: 100%;
 		height: 46px;
 		left: 0;
@@ -167,8 +173,8 @@ import base from '../../common/base'
 		width: 48%;
 		background-color: lightgray;
 		text-align: center;
-		height: 40px;
-		line-height: 40px;
+		height: 50px;
+		line-height: 50px;
 		border-radius: 8px;
 	}
 	.popup

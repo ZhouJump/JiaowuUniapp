@@ -99,7 +99,7 @@
 	.namebox
 	{
 		position: absolute;
-		bottom: 40%;
+		bottom: 54%;
 		left: 40px;
 		font-size: 20px;
 		font-weight: 600;
@@ -108,9 +108,9 @@
 	.schoolnamebox
 	{
 		position: absolute;
-		bottom: 30%;
+		bottom: 45%;
 		left: 41px;
-		font-size: 10px;
+		font-size: 12px;
 		color: #232323;
 	}
 	.avtarbox{
@@ -121,6 +121,7 @@
 		border-radius: 40px;
 		right: 40px;
 		bottom: 30%;
+		z-index: 2;
 		text-align: center;
 		line-height: 80px;
 		color: lightgray;
@@ -129,18 +130,17 @@
 	.infobox
 	{
 		background-color: white;
-		box-shadow: 0 0 6px lightgray;
 		width: calc(100% - 40px);
 		height: 100px;
 		left: 20px;
-		border-radius: 8px;
-		top:180px;
+		border-radius: 16px;
+		top:120px;
 		position: absolute;
 		box-sizing: border-box;
 		padding: 16px;
 	}
 	.infobox view{
-		font-size: 14px;
+		font-size: 16px;
 		margin: 2px;
 	}
 	.quitbutton

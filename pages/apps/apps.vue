@@ -4,8 +4,8 @@
 			<view class="title">应用中心<i class="bi bi-caret-right-fill"></i></view>
 		</view>
 		<view class="appbox">
-			<view v-for="(item,index) in appList" class="appitem" @click="gotoapp(item.url)" :style="{backgroundColor:item.color}">
-				<i :class="['bi',item.ico,'appicon']"></i>
+			<view v-for="(item,index) in appList" class="appitem" @click="gotoapp(item.url)">
+				<i :style="{backgroundColor:item.color}" :class="['bi',item.ico,'appicon']"></i>
 				<view class="appname">{{item.name}}</view>
 			</view>
 		</view>
@@ -61,12 +61,12 @@
 	}
 	.appbox{
 		background-color: white;
-		box-shadow: 0 0 6px lightgray;
+		
 		width: calc(100% - 40px);
 		height: calc(100% - 180px);
 		left: 20px;
 		padding: 4px;
-		border-radius: 8px;
+		border-radius: 32px;
 		top:100px;
 		position: absolute;
 		box-sizing: border-box;
@@ -79,7 +79,7 @@
 	}
 	.appitem{
 		height: 100px;
-		width: 30%;
+		width: 22%;
 		margin-top: 6px;
 		margin-left: 1.5%;
 		margin-right: 1.5%;
@@ -89,14 +89,20 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		box-shadow: 0 0 2px gray ;
 	}
 	.appicon
 	{
-		font-size: 48px;
+		font-size: 30px;
+		width: 60px;
+		height: 60px;
+		text-align: center;
+		line-height: 60px;
+		border-radius: 16px;
+		margin-bottom: 6px;
 	}
 	.appname
 	{
 		font-size: 14px;
+		color: black;
 	}
 </style>

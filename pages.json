@@ -47,7 +47,15 @@
 			}
 		},
 		{
-			"path" : "pages/apps/appmodel",
+			"path" : "pages/apps/kaoshi",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/apps/jiaoshi",
 			"style" : 
 			{
 				"navigationBarTitleText" : "",
@@ -61,7 +69,8 @@
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {  
-					"titleNView": false  
+					"titleNView": false,
+					 "bounce": "none"
 				}
 	},
 	"uniIdRouter": {}
