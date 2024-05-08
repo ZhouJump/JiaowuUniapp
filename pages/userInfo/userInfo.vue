@@ -21,12 +21,12 @@
 	export default {
 		data() {
 			return {
-				loginstate:localStorage.getItem('loginstate'),
-				name:localStorage.getItem('username'),
-				xueyuan:localStorage.getItem('userxueyuan'),
-				id:localStorage.getItem('userid'),
-				fx:localStorage.getItem('userfx'),
-				zy:localStorage.getItem('userzy'),
+				loginstate:uni.getStorageSync('loginstate'),
+				name:uni.getStorageSync('username'),
+				xueyuan:uni.getStorageSync('userxueyuan'),
+				id:uni.getStorageSync('userid'),
+				fx:uni.getStorageSync('userfx'),
+				zy:uni.getStorageSync('userzy'),
 			}
 		},
 		methods: {
@@ -36,6 +36,7 @@
 				})
 			},
 			checkLogin()	{
+				console.log(this.loginstate,this.name)
 				uni.request({
 					url:base.baseUrl+'cjcx/cjcx_cxXsgrcj.html?doType=query&xnm=2023&xqm=12',
 					success: (res) => {
@@ -57,13 +58,14 @@
 							  this.fx = res.data.items[0].zyfxmc
 							  this.zy = res.data.items[0].zymc
 						  }
-						  localStorage.setItem('loginstate',this.loginstate)
-						  localStorage.setItem('username',this.name)
-						  localStorage.setItem('userxueyuan',this.xueyuan)
-						  localStorage.setItem('userid',this.id)
-						  localStorage.setItem('userfx',this.fx)
-						  localStorage.setItem('userzy',this.zy)
-					}
+							uni.setStorageSync('loginstate',this.loginstate)
+							uni.setStorageSync('username',this.name)
+							uni.setStorageSync('userxueyuan',this.xueyuan)
+							uni.setStorageSync('userid',this.id)
+							uni.setStorageSync('userfx',this.fx)
+							uni.setStorageSync('userzy',this.zy)
+					},
+					fail(res) {console.log("失败"+res)}
 				})
 			}
 		},

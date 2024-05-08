@@ -25,7 +25,7 @@
 			homeVue:homeVue
 		},
 		onLoad() {
-
+			
 		},
 		methods: {	
 

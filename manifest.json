@@ -1,5 +1,5 @@
 {
-    "name" : "uni教务",
+    "name" : "掌上莆院",
     "appid" : "__UNI__B3BC600",
     "description" : "",
     "versionName" : "1.0.0",
@@ -41,9 +41,13 @@
                 ]
             },
             /* ios打包配置 */
-            "ios" : {},
+            "ios" : {
+                "dSYMs" : false
+            },
             /* SDK配置 */
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "ad" : {}
+            }
         }
     },
     /* 快应用特有相关 */
@@ -68,20 +72,18 @@
     "uniStatistics" : {
         "enable" : false
     },
-	"h5": 
-	{
-	        "devServer": {
-	            "proxy": {
-	                "/prefix/api/user/list": {
-	                    "target": "http://edu.zhoujump.club",
-	                    "pathRewrite": {
-	                        "^/prefix": ""
-	                    }
-	                }
-	            }
-	        }
-	    },
-
-
+    "h5" : {
+        "devServer" : {
+            "proxy" : {
+                "/prefix/api/user/list" : {
+                    "target" : "http://edu.zhoujump.club",
+                    "pathRewrite" : {
+                        "^/prefix" : ""
+                    }
+                }
+            },
+            "https" : false
+        }
+    },
     "vueVersion" : "3"
 }

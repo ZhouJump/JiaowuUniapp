@@ -40,7 +40,7 @@ import base from '../../common/base'
 	export default {
 		data() {
 			return {
-				chengji:JSON.parse(localStorage.getItem('chengji')),
+				chengji:uni.getStorageSync('chengji')!=''?JSON.parse(uni.getStorageSync('chengji')):'',
 				isload:false,
 				ispop:false,
 				tern:'3',
@@ -50,12 +50,13 @@ import base from '../../common/base'
 		methods: {
 			openpop()
 			{
+				if(this.isload==true)
+					return
 				this.ispop=true
 			},
 			get()
 			{
 				if(this.isload)return
-				
 				this.isload = true
 				this.ispop = false
 				uni.request({
@@ -63,6 +64,12 @@ import base from '../../common/base'
 					success: (res) => {
 						 if(res.data.length != undefined)
 							  {
+								  uni.showToast({
+								  	title:'登录失效，请重新登陆',
+								  	duration:2000,
+								  	position:'center'
+								  })
+								  this.isload = false
 								  uni.navigateTo({
 								  	url:"/pages/login/login"
 								  })
@@ -75,11 +82,22 @@ import base from '../../common/base'
 						  });
 						  console.log(list)
 						  this.chengji = list
-						  localStorage.setItem('chengji',JSON.stringify(list))
+						  uni.setStorageSync('chengji',JSON.stringify(list))
 						  this.isload = false
+					},
+					fail() {
+						this.isload = false
+						uni.showToast({
+							title:'加载失败了',
+							duration:2000,
+							position:'center'
+						})
 					}
 				})
 			}
+		},
+		mounted() {
+			console.log(this.chengji)
 		}
 	}
 </script>
@@ -217,6 +235,7 @@ import base from '../../common/base'
 		box-shadow: 0 0 6px gray;
 		opacity: 0.6;
 		animation-duration: 500ms;
+		animation-iteration-count: infinite;
 		
 	}
 	.tip{

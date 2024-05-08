@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<iframe id="iframe" :src="baseUrl + 'xtgl/login_slogin.html'"></iframe>
+		<web-view id="iframe" :src="baseUrl"></web-view>
 		<view @click="back" class="okbutton">完成登录？点我返回</view>
 	</view>
 </template>
@@ -10,7 +10,8 @@
 	export default {
 		data() {
 			return {
-				baseUrl:base.baseUrl
+				baseUrl:base.baseUrl+'xtgl/login_slogin.html',
+				webwiew:''
 			}
 		},
 		methods: {
@@ -18,12 +19,7 @@
 				this.timer = setInterval(this.checkLogin, 1000);
 			  },
 			checkLogin(){
-			  var iframeWindow = document.getElementById('iframe').contentWindow;
-			  var currentHref = iframeWindow.document.location.href;
-			  if(currentHref.includes('index'))
-			  {
-				this.back()
-			  }
+				console.log(this.baseUrl)
 			},
 			back()
 			{
@@ -32,7 +28,10 @@
 		},
 		mounted() {
 		        this.start()
-		    }
+		    },
+		onUnload() {
+			clearInterval(this.timer)
+		}
 	}
 </script>
 
