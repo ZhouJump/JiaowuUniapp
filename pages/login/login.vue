@@ -11,7 +11,6 @@
 		data() {
 			return {
 				baseUrl:base.baseUrl+'xtgl/login_slogin.html',
-				webwiew:''
 			}
 		},
 		methods: {
@@ -19,7 +18,11 @@
 				this.timer = setInterval(this.checkLogin, 1000);
 			  },
 			checkLogin(){
-				console.log(this.baseUrl)
+				var pages = getCurrentPages();  
+				var page = pages[pages.length - 1];  
+				var currentWebview = page.$getAppWebview();
+				if(currentWebview.children()[0].getURL()!=base.baseUrl+'xtgl/login_slogin.html')
+					uni.navigateBack(1)
 			},
 			back()
 			{

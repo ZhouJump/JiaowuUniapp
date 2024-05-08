@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<apps-vue v-if="selected==0"></apps-vue>
-		<home-vue v-if="selected==1"></home-vue>
-		<user-info-vue v-if="selected==2"></user-info-vue>
+		<apps-vue ref="appsvue" v-if="selected==0"></apps-vue>
+		<home-vue ref="homevue" v-if="selected==1"></home-vue>
+		<user-info-vue ref="userinfovue" v-if="selected==2"></user-info-vue>
 		<tabbar :value="selected" @input="selected=$event"></tabbar>
 	</view>
 </template>
@@ -29,6 +29,9 @@
 		},
 		methods: {	
 
+		},
+		onShow() {
+			this.$refs.userinfovue.checkLogin()
 		}
 	}
 </script>

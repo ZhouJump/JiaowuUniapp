@@ -12,7 +12,7 @@
 			<view v-if="loginstate != 'logout'">方向:{{fx}}</view>
 			<i v-if="loginstate == 'offline'" @click="gotologin" class="bi bi-arrow-clockwise refresh"></i>
 		</view>
-		<view v-if="loginstate == 'online'" class="quitbutton">退出登录</view>
+		<view v-if="loginstate == 'online'" @click="logout" class="quitbutton">退出登录</view>
 	</view>
 </template> 
 
@@ -30,6 +30,19 @@
 			}
 		},
 		methods: {
+			logout(){
+				var that = this
+				uni.request({
+					url:base.baseUrl+'logout',
+					success() {
+						that.checkLogin()
+						uni.showToast({
+							title:'已退出登录',
+							duration:2000
+						})
+					}
+				})
+			},
 			gotologin(){
 				uni.navigateTo({
 					url:'/pages/login/login',
