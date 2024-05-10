@@ -4,12 +4,12 @@
 			<view class="title">空教室查询<i class="bi bi-caret-right-fill"></i></view>
 		</view>
 		<view class="appbox">
-			<view :style="{color:item.cj<60?'red':''}" class="item" v-for="item in kaoshi">
+			<view :style="{color:item.cj<60?'red':''}" class="item" v-for="item in jiaoshi">
 				<view class="kcmc">{{item.kcmc}}</view>
 				<view class="cj">{{item.cdmc}} {{item.kssj.slice(5)}}</view>
 			</view>
 		</view>
-		<view class="tip" v-if="kaoshi == undefined">点击获取数据<i class="bi bi-arrow-right"></i></view>
+		<view class="tip" v-if="jiaoshi == ''">点击获取数据<i class="bi bi-arrow-right"></i></view>
 		<i @click="openpop" :style="{animationName:isload?'rotate':''}" class="bi bi-arrow-clockwise refresh"></i>
 		
 		<!-- 弹出框 -->
@@ -43,15 +43,15 @@ import base from '../../common/base'
 	export default {
 		data() {
 			return {
-				kaoshi:uni.getStorageSync('kaoshi')!=''?JSON.parse(uni.getStorageSync('kaoshi')):'',
+				jiaoshi:uni.getStorageSync('jiaoshi')!=''?JSON.parse(uni.getStorageSync('jiaoshi')):'',
 				isload:false,
 				ispop:false,
 				default:[8,base.getWeekInYear() - base.startWeek - 1,base.getWeek() - 1,5
 				],
-				lh:'04',
+				lh:'4',
 				zcd:base.getWeekInYear() - base.startWeek,
 				xqj:base.getWeek(),
-				jcd:'06',
+				jcd:'6',
 				lhlist:[
 					{text:'北区教学楼',id:'01'},
 					{text:'北区实验楼',id:'14'},
@@ -129,9 +129,9 @@ import base from '../../common/base'
 				if(this.isload)return
 				this.isload = true
 				this.ispop = false
-				console.log(this.tern,this.year)
+				console.log(this.lh,this.zcd,this.xqj,this.jcd)
 				uni.request({
-					url:base.baseUrl +'kwgl/kscx_cxXsksxxIndex.html?doType=query&xnm='+this.year+'&xqm='+this.tern+'&queryModel.showCount=100',
+					url:base.baseUrl +'cdjy/cdjy_cxKxcdlb.html?doType=query&fwzt=cx&xqh_id=1&xnm=2023&xqm=12&cdlb_id=&cdejlb_id=&qszws=&jszws=&cdmc=&lh='+this.lh+'&jyfs=0&cdjylx=&zcd='+2 ** (this.zcd-1)+'&xqj='+this.xqj+'&jcd='+this.zcd+'&queryModel.showCount=100',
 					success: (res) => {
 						 if(res.data.length != undefined)
 							  {
@@ -152,8 +152,8 @@ import base from '../../common/base'
 							list.push({kcmc:element.kcmc,kssj:element.kssj,cdmc:element.cdmc})
 						  });
 						  console.log(list,this.year,this.tern)
-						  this.kaoshi = list
-						  uni.setStorageSync('kaoshi',JSON.stringify(list))
+						  this.jiaoshi = list
+						  uni.setStorageSync('jiaoshi',JSON.stringify(list))
 						  this.isload = false
 					},
 					fail() {
@@ -272,7 +272,7 @@ import base from '../../common/base'
 		width: calc(100% - 40px);
 		height: calc(100% - 140px);
 		left: 20px;
-		border-radius: 8px;
+		border-radius: 32px;
 		top:100px;
 		position: absolute;
 		box-sizing: border-box;

@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<apps-vue ref="appsvue" v-if="selected==0"></apps-vue>
-		<home-vue ref="homevue" v-if="selected==1"></home-vue>
-		<user-info-vue ref="userinfovue" v-if="selected==2"></user-info-vue>
+		<apps-vue ref="appsvue" v-show="selected==0"></apps-vue>
+		<home-vue ref="homevue" v-show="selected==1"></home-vue>
+		<user-info-vue ref="userinfovue" v-show="selected==2"></user-info-vue>
 		<tabbar :value="selected" @input="selected=$event"></tabbar>
 	</view>
 </template>

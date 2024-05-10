@@ -1,0 +1,7 @@
+{
+  "name": "castInfo",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

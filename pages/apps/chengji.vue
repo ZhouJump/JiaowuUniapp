@@ -9,7 +9,7 @@
 				<view class="cj">{{item.cj}}<text class="sub">{{item.ksxz=='重修补考'?'(重)':''}}</text></view>
 			</view>
 		</view>
-		<view class="tip" v-if="chengji == undefined">点击获取数据<i class="bi bi-arrow-right"></i></view>
+		<view class="tip" v-if="chengji == ''">点击获取数据<i class="bi bi-arrow-right"></i></view>
 		<i @click="openpop" :style="{animationName:isload?'rotate':''}" class="bi bi-arrow-clockwise refresh"></i>
 		
 		<!-- 弹出框 -->
@@ -217,7 +217,7 @@ import base from '../../common/base'
 		width: calc(100% - 40px);
 		height: calc(100% - 140px);
 		left: 20px;
-		border-radius: 8px;
+		border-radius: 32px;
 		top:100px;
 		position: absolute;
 		box-sizing: border-box;
