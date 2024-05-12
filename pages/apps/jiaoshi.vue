@@ -5,8 +5,8 @@
 		</view>
 		<view class="appbox">
 			<view :style="{color:item.cj<60?'red':''}" class="item" v-for="item in jiaoshi">
-				<view class="kcmc">{{item.kcmc}}</view>
-				<view class="cj">{{item.cdmc}} {{item.kssj.slice(5)}}</view>
+				<view class="kcmc">{{item.cdmc.slice(0,2)}}</view>
+				<view class="cj">{{item.cdmc}}</view>
 			</view>
 		</view>
 		<view class="tip" v-if="jiaoshi == ''">点击获取数据<i class="bi bi-arrow-right"></i></view>
@@ -148,8 +148,14 @@ import base from '../../common/base'
 							  }
 						  console.log(res.data.items)
 						  var list = []
+						  if(res.data.items.length == 0)
+							uni.showToast({
+								title: '该时段该楼栋没有空闲教室',
+								position:'center',
+								duration:2000
+							});
 						  res.data.items.forEach(element => {
-							list.push({kcmc:element.kcmc,kssj:element.kssj,cdmc:element.cdmc})
+							list.push({cdmc:element.cdmc})
 						  });
 						  console.log(list,this.year,this.tern)
 						  this.jiaoshi = list
@@ -173,7 +179,7 @@ import base from '../../common/base'
 	}
 </script>
 
-<style>
+<style scoped>
 	.mask
 	{
 		position: absolute;

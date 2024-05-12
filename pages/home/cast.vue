@@ -23,12 +23,12 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.castinfo{
 		height: 40px;
 		width: calc(100% - 40px);
-		margin-bottom: 6px;
-		box-shadow: 0 0 4px 2px lightgray;
+		margin-bottom: 12px;
+		box-shadow: 0 0 4px 2px #eaeaea;
 		line-height: 40px;
 		border-radius: 8px;
 		display: flex;

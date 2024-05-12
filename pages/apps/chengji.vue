@@ -114,7 +114,7 @@ import base from '../../common/base'
 	}
 </script>
 
-<style>
+<style scoped>
 	.mask
 	{
 		position: absolute;

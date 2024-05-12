@@ -88,7 +88,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.topbox
 	{
 		width: 100%;
