@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="page">
 		<view class="topbox">
 			<view class="title">成绩查询<i class="bi bi-caret-right-fill"></i></view>
 		</view>
@@ -255,8 +255,9 @@ import base from '../../common/base'
 		from{rotate: 0deg;}
 		to{rotate: 360deg;}
 	}
-	body
+	page
 	{
+		height: 100%;
 		overflow: hidden;
 		overflow-y: hidden;
 	}

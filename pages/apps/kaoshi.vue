@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="page">
 		<view class="topbox">
 			<view class="title">考场查询<i class="bi bi-caret-right-fill"></i></view>
 		</view>
@@ -114,7 +114,7 @@ import base from '../../common/base'
 	}
 </script>
 
-<style>
+<style scoped>
 	.mask
 	{
 		position: absolute;
@@ -250,10 +250,5 @@ import base from '../../common/base'
 	@keyframes rotate{
 		from{rotate: 0deg;}
 		to{rotate: 360deg;}
-	}
-	body
-	{
-		overflow: hidden;
-		overflow-y: hidden;
 	}
 </style>

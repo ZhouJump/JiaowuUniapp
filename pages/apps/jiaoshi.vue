@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="page">
 		<view class="topbox">
 			<view class="title">空教室查询<i class="bi bi-caret-right-fill"></i></view>
 		</view>
