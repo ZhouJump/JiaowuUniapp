@@ -1,8 +1,11 @@
 <template>
 	<view>
-		<apps-vue ref="appsvue" v-show="selected==0"></apps-vue>
-		<home-vue ref="homevue" v-show="selected==1"></home-vue>
-		<user-info-vue ref="userinfovue" v-show="selected==2"></user-info-vue>
+		<swiper circular :current="selected" duration="200" class="swiper" @change="changepage">
+			<swiper-item><apps-vue ref="appsvue"></apps-vue></swiper-item>
+			<swiper-item><home-vue ref="homevue"></home-vue></swiper-item>
+			<swiper-item><user-info-vue ref="userinfovue"></user-info-vue></swiper-item>
+		</swiper>
+		
 		<tabbar :value="selected" @input="selected=$event"></tabbar>
 	</view>
 </template>
@@ -28,7 +31,10 @@
 			
 		},
 		methods: {	
-			
+			changepage(e)
+			{
+				this.selected = e.detail.current
+			}
 		},
 		onShow() {
 			this.$refs.userinfovue.checkLogin()
@@ -37,6 +43,13 @@
 	}
 </script>
 
-<style>
-	
+<style scoped>
+	.swiper{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+	}
+	swiper-item{
+		position: relative;
+	}
 </style>

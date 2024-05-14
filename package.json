@@ -1,6 +1,17 @@
 {
-  "dependencies": {
-    "bootstrap-icons": "^1.11.3",
-    "i": "^0.3.7"
-  }
+    "id": "m-drag",
+    "name": "列表垂直方向拖拽drag组件",
+    "displayName": "列表垂直方向拖拽drag组件",
+    "version": "1.0.0",
+    "description": "垂直方向拖拽drag组件",
+    "keywords": [
+        "拖拽",
+        "drag"
+    ],
+    "dcloudext": {
+        "category": [
+            "前端组件",
+            "通用组件"
+        ]
+    }
 }

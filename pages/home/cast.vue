@@ -27,10 +27,10 @@
 	.castinfo{
 		height: 40px;
 		width: calc(100% - 40px);
-
 		line-height: 40px;
 		border-radius: 8px;
 		display: flex;
+		color: #323232;
 	}
 	i{
 		display: inline-block;

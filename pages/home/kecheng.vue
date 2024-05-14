@@ -47,38 +47,37 @@
 		height: 200px;
 		width: calc(100% - 40px);
 		margin-bottom: 12px;
-		box-shadow: 0 0 4px 2px #eaeaea;
+		box-shadow: 0 0 4px 2px #f0f0f0;
 		line-height: 40px;
-		border-radius: 8px;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-around;
+		border-radius: 16px;
+		position: relative;;
 	}
 	.title{
 		font-size: 16px;
 		padding-left: 20px;
-		height: 14px;
-		width: 100%;
+		color: #323232;
 	}
 	.box{
 		width: calc(100% - 20px);
 		height: calc(100% - 40px);
 		overflow: hidden;
-		border-radius: 4px;
+		border-radius: 8px;
 		overflow-y: auto;
+		margin-left: 10px;
+		margin-top: -5px;
 	}
 	.item{
 		width: 100%;
-		height: 80px;
-		margin-top: 6px;
-		border-radius: 4px;
+		height: 60px;
+		margin-bottom: 6px;
+		border-radius: 8px;
 		position: relative;
-		background-color: #d8daff;
+		background-color: #eef0ff;
 	}
 	.ksmc{
 		font-size: 16px;
-		height: 30px;
-		padding-left: 16px;
+		height: 20px;
+		padding-left: 20px;
 		color: blue;
 	}
 	.ksmc:nth-child(2){
@@ -86,12 +85,12 @@
 		color: #7c7eff;
 	}
 	.fence{
-		width: 6px;
-		height: 60px;
+		width: 4px;
+		height: 40px;
 		position: absolute;
 		background-color: #5454ff;
 		top:10px;
-		left: 6px;
+		left: 8px;
 		border-radius: 3px;
 	}
 </style>
