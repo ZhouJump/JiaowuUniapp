@@ -49,7 +49,10 @@
                 "ad" : {}
             },
             "splashscreen" : {
-                "androidStyle" : "common"
+                "androidStyle" : "default",
+                "android" : {
+                    "xhdpi" : "D:/program/uniJiaowuAdmin/uni教务后台/static/cover.png"
+                }
             },
             "icons" : {
                 "android" : {
