@@ -42,7 +42,10 @@
 				comlist:uni.getStorageSync('comlist')!=''?JSON.parse(uni.getStorageSync('comlist')):'',
 				comshop:[
 						{name:'近期考试',id:'kaoshi'},
-						{name:'今日课程',id:'kecheng'}]
+						{name:'今日课程',id:'kecheng'},
+						{name:'每日一言',id:'yiyan'},
+						{name:'舔狗日记',id:'tiangou'},
+						{name:'ACG日报',id:'acgnews'}]
 						}
 		},
 		methods: {
@@ -100,6 +103,8 @@
 	.mycom{
 		width: 100%;
 		height: 100%;
+		overflow: hidden;
+		overflow-y: auto;
 	}
 	.comshop{
 		width: 100%;

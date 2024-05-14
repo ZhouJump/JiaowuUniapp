@@ -64,7 +64,6 @@
 					  else
 						  {
 							  this.loginstate = 'online'
-							  console.log(res.data.items[0])
 							  this.name = res.data.items[0].xm
 							  this.xueyuan = res.data.items[0].zsxymc
 							  this.id = res.data.items[0].xh

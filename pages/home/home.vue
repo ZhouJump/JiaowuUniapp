@@ -1,9 +1,9 @@
 <template>
 	<view class="topbox"></view>
 	<view class="manbox">
-		<cast-info style="position: sticky;"></cast-info>
-		<banner style="position: sticky;top:10px;background-color: white;"></banner>
-		<component style="position: sticky;top:10px;background-color: white;" ref="reflist" v-for="(item,index) in comlist" :is="item.id"></component>
+		<cast-info style="position: sticky;top:0"></cast-info>
+		<banner style="position: sticky;top:4px;background-color: white;"></banner>
+		<component :style="{top:(index+1)*24+'px'}" style="position: sticky;background-color: white;" ref="reflist" v-for="(item,index) in comlist" :is="item.id"></component>
 		<setting></setting>
 	</view>
 </template>
@@ -15,6 +15,9 @@
 	import kaoshi from "/pages/home/kaoshi.vue"
 	import kecheng from "/pages/home/kecheng.vue"
 	import setting from "/pages/home/setting.vue"
+	import yiyan from "/pages/home/yiyan.vue"
+	import tiangou from "/pages/home/tiangou.vue"
+	import acgnews from "/pages/home/acgnews.vue"
 	export default {
 		data() {
 			return {
@@ -46,7 +49,10 @@
 			banner:banner,
 			kaoshi:kaoshi,
 			kecheng:kecheng,
-			setting:setting
+			setting:setting,
+			yiyan:yiyan,
+			tiangou:tiangou,
+			acgnews:acgnews
 		},
 		mounted() {
 			this.loadcom()
