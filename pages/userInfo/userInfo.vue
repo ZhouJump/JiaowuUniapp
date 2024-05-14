@@ -1,16 +1,16 @@
 <template>
 	<view>
 		<view class="topbox">
-			<view v-if="loginstate != 'logout'" class="namebox">{{name}}<i class="bi bi-caret-right-fill"></i></view>
-			<view v-if="loginstate == 'logout'" @click="gotologin" class="namebox">立即登录<i class="bi bi-caret-right-fill"></i></view>
+			<view v-if="loginstate != 'offline'" class="namebox">{{name}}<i class="bi bi-caret-right-fill"></i></view>
+			<view v-if="loginstate == 'offline'" @click="gotologin" class="namebox">立即登录<i class="bi bi-caret-right-fill"></i></view>
 			<view v-if="loginstate != 'logout'" class="schoolnamebox">{{xueyuan}}</view>
 			<view class="avtarbox"><i class="bi bi-person-fill"></i></view>
 		</view>
 		<view class="infobox">
-			<view v-if="loginstate != 'logout'">学号:{{id}}</view>
-			<view v-if="loginstate != 'logout'">专业:{{zy}}</view>
-			<view v-if="loginstate != 'logout'">方向:{{fx}}</view>
-			<i v-if="loginstate == 'offline'" @click="gotologin" class="bi bi-arrow-clockwise refresh"></i>
+			<view v-if="loginstate != 'offline'">学号:{{id}}</view>
+			<view v-if="loginstate != 'offline'">专业:{{zy}}</view>
+			<view v-if="loginstate != 'offline'">方向:{{fx}}</view>
+			<i v-if="loginstate == 'logout'" @click="gotologin" class="bi bi-arrow-clockwise refresh"></i>
 		</view>
 		<view v-if="loginstate == 'online'" @click="logout" class="quitbutton">退出登录</view>
 	</view>
@@ -51,7 +51,7 @@
 			checkLogin()	{
 				console.log(this.loginstate,this.name)
 				uni.request({
-					url:base.baseUrl+'cjcx/cjcx_cxXsgrcj.html?doType=query&xnm=2023&xqm=12',
+					url:base.baseUrl+'cjcx/cjcx_cxXsgrcj.html?doType=query&xnm=2022&xqm=3',
 					success: (res) => {
 						if(res.data.length != undefined)
 						  {

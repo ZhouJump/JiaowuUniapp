@@ -1,10 +1,15 @@
 <template>
-	<view class="kaoshi" @click="gotokaoshi">
-		<view class="title">近期考试</view>
+	<view class="kaoshi" @click="gotokebiao">
+		<view class="title">今日课程</view>
 		<view class="box">
-			<view class="item" v-for="item in kaoshi" v-show="(item.kssj.slice(5,7)-0>=month&&item.kssj.slice(8,10)-0>=day)||item.kssj.slice(5,7)-0>month">
+			<view :style="{filter:'hue-rotate('+item.color+'deg)'}" class="item" v-for="item in kaoshi" v-show="item.xqj == xqj && item.zs.includes(zhou)">
 				<view class="ksmc">{{item.kcmc}}</view>
-				<view class="ksmc">{{item.cdmc}} <text v-show="item.kssj.slice(5,7)-0 > month-0">{{item.kssj.slice(5,7)-0-(month-0)}}月</text>{{item.kssj.slice(8,10)-0-(day-0)}}天后考试</view>
+				<view class="ksmc">
+					<text v-if="item.ks<=5">上午第{{item.ks}}节</text>
+					<text v-if="item.ks>5&&item.ks<=9">下午第{{item.ks-5}}节</text>
+					<text v-if="item.k>9">晚上第{{item.ks-9}}节</text>
+					 {{item.cdmc}} {{item.xm}}
+					</view>
 				<view class="fence"></view>
 			</view>
 		</view>
@@ -12,28 +17,27 @@
 </template>
 
 <script>
+	import base from "../../common/base.js"
 	export default {
 		data() {
 			return {
-				kaoshi:uni.getStorageSync('kaoshi')!=''?JSON.parse(uni.getStorageSync('kaoshi')):'',
-				day:0,
-				month:0
+				kaoshi:uni.getStorageSync('kebiao')!=''?JSON.parse(uni.getStorageSync('kebiao')):'',
+				zhou:base.getWeekInYear() - base.startWeek,
+				xqj:base.getWeek()
 			}
 		},
 		methods: {
-			gotokaoshi(){
+			gotokebiao(){
 				uni.navigateTo({
-					url:'/pages/apps/kaoshi'
+					url:'/pages/apps/kebiao'
 				})
 			},
 			refresh(){
-				this.kaoshi=uni.getStorageSync('kaoshi')!=''?JSON.parse(uni.getStorageSync('kaoshi')):''
+				this.kaoshi=uni.getStorageSync('kebiao')!=''?JSON.parse(uni.getStorageSync('kebiao')):''
 			}
 		},
 		mounted() {
-			let data = new Date
-			this.day = data.getDate()
-			this.month = data.getMonth() + 1
+			
 		}
 	}
 </script>
@@ -60,22 +64,22 @@
 		width: calc(100% - 20px);
 		height: calc(100% - 40px);
 		overflow: hidden;
-		overflow-y: auto;
 		border-radius: 4px;
+		overflow-y: auto;
 	}
 	.item{
 		width: 100%;
 		height: 80px;
-		background-color: #d8daff;
 		margin-top: 6px;
 		border-radius: 4px;
 		position: relative;
+		background-color: #d8daff;
 	}
 	.ksmc{
-		color: #5454ff;
-		height: 30px;
 		font-size: 16px;
+		height: 30px;
 		padding-left: 16px;
+		color: blue;
 	}
 	.ksmc:nth-child(2){
 		font-size: 14px;

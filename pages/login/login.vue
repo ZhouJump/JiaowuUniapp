@@ -15,18 +15,20 @@
 		},
 		methods: {
 			start(){
-				this.timer = setInterval(this.checkLogin, 1000);
+				this.timer = setInterval(this.checkLogin, 500);
 			  },
 			checkLogin(){
 				var pages = getCurrentPages();  
-				var page = pages[pages.length - 1];  
+				var page = pages[pages.length - 1];
+				// #ifdef APP-PLUS
 				var currentWebview = page.$getAppWebview();
+				// #endif
 				if(currentWebview.children()[0].getURL()!=base.baseUrl+'xtgl/login_slogin.html')
 					uni.navigateBack(1)
 			},
 			back()
 			{
-				uni.navigateBack(1)
+				uni.navigateBack(2)
 			}
 		},
 		mounted() {

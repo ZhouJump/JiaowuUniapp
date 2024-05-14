@@ -28,10 +28,11 @@
 			
 		},
 		methods: {	
-
+			
 		},
 		onShow() {
 			this.$refs.userinfovue.checkLogin()
+			this.$refs.homevue.refresh()
 		}
 	}
 </script>

@@ -2,7 +2,8 @@
 	<view class="manbox">
 		<cast-info></cast-info>
 		<banner></banner>
-		<kaoshi></kaoshi>
+		<kaoshi ref="kaoshi"></kaoshi>
+		<kecheng ref="kecheng"></kecheng>
 	</view>
 </template>
 
@@ -11,19 +12,24 @@
 	import banner from "/pages/home/banner.vue"
 	import castInfo from "/pages/home/cast.vue"
 	import kaoshi from "/pages/home/kaoshi.vue"
+	import kecheng from "/pages/home/kecheng.vue"
 	export default {
 		data() {
 			return {
-				week:20
+				
 			}
 		},
 		methods: {
-		
+			refresh(){
+				this.$refs.kaoshi.refresh()
+				this.$refs.kecheng.refresh()
+			}
 		},
 		components:{
 			castInfo:castInfo,
 			banner:banner,
 			kaoshi:kaoshi,
+			kecheng:kecheng
 		},
 		}
 </script>

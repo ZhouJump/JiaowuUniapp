@@ -4,10 +4,24 @@ module.exports = {
 	_before: function () { // 通用预处理器
 
 	},
-	getcastinfo(){
-		return 'get info sucess'
+	async getcastinfo(){
+		const db= uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
+					clientInfo: this.getClientInfo()
+				})
+		db.setUser({role:['admin']})
+		let res = await db.collection('castInfo')
+			.where({infoType:"cast"})
+			.get()
+		return res.data[0].info
 	},
-	setcastinfo(){
-		
+	async setcastinfo(info){
+		const db= uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
+					clientInfo: this.getClientInfo()
+				})
+		db.setUser({role:['admin']})
+		await db.collection('castInfo')
+			.where({infoType:"cast"})
+			.update({info:info})
+		return 'sucess'
 	}
 }
