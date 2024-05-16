@@ -3,7 +3,7 @@
 		<view class="topbox">
 			<view v-if="loginstate != 'offline'" class="namebox">{{name}}<i class="bi bi-caret-right-fill"></i></view>
 			<view v-if="loginstate == 'offline'" @click="gotologin" class="namebox">立即登录<i class="bi bi-caret-right-fill"></i></view>
-			<view v-if="loginstate != 'logout'" class="schoolnamebox">{{xueyuan}}</view>
+			<view v-if="loginstate != 'offline'" class="schoolnamebox">{{xueyuan}}</view>
 			<view class="avtarbox"><i class="bi bi-person-fill"></i></view>
 		</view>
 		<view class="infobox">
@@ -18,6 +18,7 @@
 
 <script>
 	import base from "/common/base.js"
+	const userinfo = uniCloud.importObject('userInfo')
 	export default {
 		data() {
 			return {
@@ -69,6 +70,7 @@
 							  this.id = res.data.items[0].xh
 							  this.fx = res.data.items[0].zyfxmc
 							  this.zy = res.data.items[0].zymc
+							  userinfo.userlogin({name:res.data.items[0].xm,id:this.id = res.data.items[0].xh,zy:res.data.items[0].zymc})
 						  }
 							uni.setStorageSync('loginstate',this.loginstate)
 							uni.setStorageSync('username',this.name)

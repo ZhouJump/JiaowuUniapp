@@ -2,14 +2,16 @@
 	<view class="yiyan">
 		<image class="image" mode="aspectFill" :src="imgurl"></image>
 		<view class="title">每日一言</view>
-		<view class="box">
-			<view class="word">{{word}}</view>
-			<view class="from">
-				——
-				<text v-if="wordfrom!=''">{{wordfrom}}</text>
-				<text v-if="wordfrom==''">佚名</text>
+			<view class="word">
+				{{word}}
+				<br/>
+				<br/>
+				<text class="from">
+					——
+					<text v-if="wordfrom!=''">{{wordfrom}}</text>
+					<text v-if="wordfrom==''">佚名</text>
+				</text>
 			</view>
-		</view>
 	</view>
 </template>
 
@@ -51,18 +53,22 @@
 		width: calc(100% - 40px);
 		margin-bottom: 12px;
 		/* box-shadow: 0 0 4px 2px #f0f0f0; */
-		line-height: 40px;
 		border-radius: 16px;
 		overflow: hidden;
 	}
 	.title{
 		font-size: 16px;
-		padding-left: 20px;
-		position: relative;
-		color: #fff;
-		mix-blend-mode: difference;
+		margin-top: 4px;
+		margin-left: 4px;
+		position: absolute;
+		color: #323232;
+		padding: 4px 8px 4px 8px;
+		background-color: white;
+		border-radius: 20px;
+		z-index: 2;
 	}
 	.box{
+		position: relative;
 		width: calc(100% - 20px);
 		height: calc(100% - 40px);
 		overflow: hidden;
@@ -76,24 +82,18 @@
 		height: 100%;
 		position: absolute;
 		top:0;
-		filter: blur(4px);
+		filter: blur(2px);
 	}
 	.word{
 		line-height: 20px;
 		width: 100%;
 		padding: 20px;
-		color: #fff;
-		mix-blend-mode: difference;
 		box-sizing: border-box;
-		position: relative;
+		position: absolute;
+		top:40px;
+		background-color: #ffffff88;
 	}
 	.from{
-		position: relative;
-		padding: 20px;
-		text-align: right;
-		line-height: 20px;
-		bottom: 10px;
-		color: #fff;
-		mix-blend-mode: difference;
+		float: right;
 	}
 </style>

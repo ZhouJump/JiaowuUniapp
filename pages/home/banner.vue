@@ -1,9 +1,9 @@
 <template>
 	<view class="banner">
-		<swiper circular indicator-dots="true" indicator-color="#B5B5FF" indicator-active-color="#0000ff" autoplay interval="4000">
-			<swiper-item></swiper-item>
-			<swiper-item></swiper-item>
-			<swiper-item></swiper-item>
+		<swiper circular autoplay interval="5000">
+			<swiper-item @click="goto(item)" v-for="item in bannerlist">
+				<image :src="item.imgUrl" mode="aspectFill"></image>
+			</swiper-item>
 		</swiper>
 	</view>
 </template>
@@ -13,14 +13,32 @@
 	export default {
 		data() {
 			return {
-				
+				bannerlist:[]
 			}
 		},
 		methods: {
-			
+			async getbanner(){
+				this.bannerlist = await castInfo.getbanner()
+			},
+			goto(item){
+				if(item.urlType=='app')
+				{
+					uni.navigateTo({
+						url:item.url
+					})
+				}
+				else if(item.urlType=='web')
+				{
+					uni.navigateTo({
+						url:'/pages/apps/webview?url=http666'+item.url
+					})
+				}
+				else
+				{}
+			}
 		},
 		mounted() {
-			
+			this.getbanner()
 		}
 	}
 </script>
@@ -34,6 +52,7 @@
 		line-height: 40px;
 		border-radius: 16px;
 		display: flex;
+		overflow: hidden;
 	}
 	swiper{
 		width: 100%;
@@ -41,5 +60,9 @@
 	}
 	swiper-item{
 		
+	}
+	image{
+		width: 100%;
+		height: 100%;
 	}
 </style>

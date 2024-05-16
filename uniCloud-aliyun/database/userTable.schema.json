@@ -1,1 +1,1 @@
-{"bsonType":"object","required":[],"permission":{"read":false,"create":false,"update":false,"delete":false},"properties":{"_id":{"description":"ID，系统自动生成"}}}
+{"bsonType":"object","required":[],"permission":{"read":false,"create":false,"update":false,"delete":false},"properties":{"_id":{"description":"ID，系统自动生成"},"name":{"description":"学生姓名"},"id":{"description":"学生学号"},"zy":{"description":"学生专业"}}}

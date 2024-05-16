@@ -12,8 +12,8 @@
         "compilerVersion" : 3,
         "splashscreen" : {
             "alwaysShowBeforeRender" : true,
-            "waiting" : true,
             "autoclose" : true,
+            "waiting" : true,
             "delay" : 0
         },
         /* 模块配置 */
@@ -49,9 +49,9 @@
                 "ad" : {}
             },
             "splashscreen" : {
-                "androidStyle" : "common",
+                "androidStyle" : "default",
                 "android" : {
-                    "xhdpi" : ""
+                    "xhdpi" : "static/cover.png"
                 }
             },
             "icons" : {

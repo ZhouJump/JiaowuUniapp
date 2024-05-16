@@ -1,9 +1,11 @@
 <template>
 	<view class="acgnews">
 		<view class="title">ACG日报</view>
-		<swiper class="swiper">
-			<swiper-item v-for="(item,index) in list">
+		<swiper autoplay circular class="swiper">
+			<swiper-item @click="goto(item.url)" v-for="(item,index) in list">
 					<image class="image" mode="aspectFill" :src="item.picUrl"></image>
+					<view class="newstitle">{{item.title}}></view>
+					<view class="from">{{item.source}}</view>
 			</swiper-item>
 		</swiper>
 	</view>
@@ -22,8 +24,12 @@
 					url:'https://apis.tianapi.com/dongman/index?key=8a04834706f18b032b3262f7055fd2eb',
 					success: (res) => {
 						this.list = res.data.result.newslist
-						console.log(this.list)
 					}
+				})
+			},
+			goto(url){
+				uni.navigateTo({
+					url:'/pages/apps/webview?url='+url
 				})
 			}
 		},
@@ -43,6 +49,26 @@
 		border-radius: 16px;
 		overflow: hidden;
 	}
+	.from{
+		position: absolute;
+		right: 8px;
+		top:8px;
+		font-size: 14px;
+		padding: 4px 8px 4px 8px;
+		background-color: #00000088;
+		border-radius: 20px;
+		color: white;
+	}
+	.newstitle{
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		font-size: 14px;
+		padding: 8px;
+		box-sizing: border-box;
+		color: white;
+		background-image: linear-gradient(#00000000,#000000ff);
+	}
 	.swiper{
 		position: absolute;
 		top:0;
@@ -55,10 +81,14 @@
 	}
 	.title{
 		font-size: 16px;
-		padding-left: 20px;
-		margin-top: 10px;
+		margin-top: 4px;
+		margin-left: 4px;
 		position: absolute;
 		color: #323232;
+		padding: 4px 8px 4px 8px;
+		background-color: white;
+		border-radius: 20px;
+		z-index: 2;
 	}
 	.word{
 		width: 100%;

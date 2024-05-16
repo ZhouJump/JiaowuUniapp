@@ -5,7 +5,7 @@
 			<swiper-item><home-vue ref="homevue"></home-vue></swiper-item>
 			<swiper-item><user-info-vue ref="userinfovue"></user-info-vue></swiper-item>
 		</swiper>
-		
+		<image :style="{animationName:loadok?'boot':''}" src="../../static/cover.png" class="boot"></image>
 		<tabbar :value="selected" @input="selected=$event"></tabbar>
 	</view>
 </template>
@@ -18,7 +18,8 @@
 	export default {
 		data() {
 			return {
-				selected:1
+				selected:1,
+				loadok:false
 			}
 		},
 		components:{
@@ -39,11 +40,32 @@
 		onShow() {
 			this.$refs.userinfovue.checkLogin()
 			this.$refs.homevue.refresh()
+		},
+		onReady() {
+			setTimeout(()=>{
+				this.loadok=true
+				plus.navigator.closeSplashscreen()
+			},600)
 		}
 	}
 </script>
 
 <style scoped>
+
+	.boot{
+		position: absolute;
+		animation-duration: 600ms;
+		animation-fill-mode: both;
+		pointer-events: none;
+		
+		width: 100%;
+		height: 100%;
+		bottom: 0;
+		border-radius: 0;
+		opacity: 1;
+		left: 0;
+		z-index: 3;
+	}
 	.swiper{
 		width: 100%;
 		height: 100%;

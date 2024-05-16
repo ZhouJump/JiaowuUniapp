@@ -58,6 +58,11 @@
 			add(item){
 				this.comlist = [...this.comlist,item]
 				uni.setStorageSync('comlist',JSON.stringify(this.comlist))
+				uni.showToast({
+					title:item.name+'已添加至主页',
+					position:"center",
+					duration:2000
+				})
 			},
 			del(item){
 				let index = this.comlist.findIndex((list) => list === item)

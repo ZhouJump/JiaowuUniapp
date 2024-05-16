@@ -1,6 +1,6 @@
 <template>
-	<view class="castinfo">
-		<i class="bi bi-megaphone-fill"></i><text>{{castinfo}}</text>
+	<view @click="goto" v-if="castinfo.isShow" class="castinfo">
+		<i class="bi bi-megaphone-fill"></i><text>{{castinfo.info}}</text>
 	</view>
 </template>
 
@@ -13,8 +13,29 @@
 			}
 		},
 		methods: {
+			goto(){
+				if(this.castinfo.urlType=='app')
+				{
+					uni.navigateTo({
+						url:this.castinfo.url
+					})
+				}
+				else if(this.castinfo.urlType=='web')
+				{
+					uni.navigateTo({
+						url:'/pages/apps/webview?url=http666'+this.castinfo.url
+					})
+				}
+				else
+				{}
+			},
 			async getcastinfo(){
-				this.castinfo = await castInfo.getcastinfo()
+				let res = await castInfo.getcastinfo()
+				console.log(res)
+				if(res == 'error')
+					this.castinfo = {info:'获取失败'}
+				else
+					this.castinfo = res[0]
 			}
 		},
 		mounted() {

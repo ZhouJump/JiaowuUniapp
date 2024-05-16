@@ -1,7 +1,7 @@
 <template>
 	<view class="tabbar">
-		<view class="shadow" :style="{left:value*33.33+'%'}"></view>
-		<view @click="tabTap(index)" v-for="(item,index) in tabbarList" :class="value==index?'itemSelect':'item'">
+		<view class="shadow" :style="{left:value*33.33+'%',opacity:loadok?'':'0'}"></view>
+		<view @click="tabTap(index)" v-for="(item,index) in tabbarList" :class="value==index&&loadok?'itemSelect':'item'">
 			<i :class="['bi',item.icon]"></i>
 			{{item.text}}
 		</view>
@@ -13,13 +13,22 @@
 	export default {
 		name:"tabbar",
 		props:{
-			value:Number
+			value:Number,
 		},
 		methods: {
 			tabTap(index)
 			{
 				this.$emit("input",index)
+			},
+			load(){
+				setTimeout(()=>{
+						this.loadok = 1
+						console.log('ok')
+				},1000)
 			}
+		},
+		mounted() {
+			this.load()
 		},
 		data() {
 			return {
@@ -39,7 +48,8 @@
 						"text": "我的",
 						"icon":"bi-person-fill"
 					}
-				]
+				],
+				loadok:false
 			};
 		},
 		
