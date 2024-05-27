@@ -23,7 +23,6 @@
 			load(){
 				setTimeout(()=>{
 						this.loadok = 1
-						console.log('ok')
 				},1000)
 			}
 		},

@@ -15,11 +15,13 @@
 	import appsVue from '../apps/apps.vue'
 	import userInfoVue from '../userInfo/userInfo.vue'
 	import homeVue from '../home/home.vue'
+	const user = uniCloud.importObject('userInfo')
 	export default {
 		data() {
 			return {
 				selected:1,
-				loadok:false
+				loadok:false,
+				message:{message:[]},
 			}
 		},
 		components:{
@@ -35,7 +37,41 @@
 			changepage(e)
 			{
 				this.selected = e.detail.current
-			}
+			},
+			openpush(){
+				uni.onPushMessage((res) => {
+					console.log("收到推送消息：",res) //监听推送消息
+					this.message = JSON.parse(uni.getStorageSync('message'+res.data.payload.id))||{message:[]}
+					this.sentmeaasge(res.data.payload)
+				})
+			},
+			sentmeaasge(payload){
+				let chat = payload
+				chat.sent = false
+				this.message.message.unshift(chat)
+				uni.setStorageSync('message'+payload.id,JSON.stringify(this.message))
+				this.insertmsg(chat)
+			},
+			async insertmsg(chat){
+				let message = uni.getStorageSync('message')
+				if(message == '')
+					message = {msg:[]}
+				else
+					message = JSON.parse(message)
+				let ishave = false
+				message.msg.forEach((msg,index)=>{
+					if(msg.id == chat.id){
+						ishave = true
+						message.msg[index].chat = chat
+						message.msg.unshift(message.msg.splice(index,1)[0])
+					}
+				})
+				if(ishave == false){
+					let res = await user.getuser({id:chat.id})
+					message.msg.unshift({id:chat.id,name:res.name,chat:chat})
+				}
+				uni.setStorageSync('message',JSON.stringify(message))
+			},
 		},
 		onShow() {
 			this.$refs.userinfovue.checkLogin()
@@ -46,6 +82,7 @@
 				this.loadok=true
 				plus.navigator.closeSplashscreen()
 			},600)
+			this.openpush()
 		}
 	}
 </script>

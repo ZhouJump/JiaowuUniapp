@@ -2,7 +2,7 @@
 	import "bootstrap-icons/font/bootstrap-icons.css"
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
+			
 		},
 		onShow: function() {
 			console.log('App Show')

@@ -111,8 +111,86 @@
 			{
 				"navigationBarTitleText" : ""
 			}
+		},
+		{
+			"path" : "pages/apps/ershou/ershou",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/apps/ershou/xiangqin",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/apps/ershou/dizhi",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/apps/ershou/checkout",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
-	],
+	,{
+    "path": "uni_modules/uni-pay/pages/success/success",
+    "style": {
+        "backgroundColor": "#F8F8F8",
+        "navigationBarTitleText": "支付成功"
+    }
+}
+,{
+    "path": "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview",
+    "style": {
+        "backgroundColor": "#F8F8F8",
+        "navigationBarTitleText": "ad"
+    }
+}
+,{
+    "path": "uni_modules/uni-pay/pages/pay-desk/pay-desk",
+    "style": {
+        "backgroundColor": "#F8F8F8",
+        "navigationBarTitleText": "收银台"
+    }
+},
+{
+	"path" : "pages/apps/ershou/mysell",
+	"style" : 
+	{
+		"navigationBarTitleText" : ""
+	}
+},
+{
+	"path" : "pages/apps/ershou/mybuy",
+	"style" : 
+	{
+		"navigationBarTitleText" : ""
+	}
+},
+{
+	"path" : "pages/apps/ershou/myselled",
+	"style" : 
+	{
+		"navigationBarTitleText" : ""
+	}
+},
+{
+	"path" : "pages/apps/ershou/chat",
+	"style" : 
+	{
+		"navigationBarTitleText" : ""
+	}
+}
+],
+
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -120,7 +198,8 @@
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {  
 					"titleNView":false,
-					 "bounce": "none"
+					 "bounce": "none",
+					 "softinputMode": "adjustResize"
 				}
 	},
 	"uniIdRouter": {}

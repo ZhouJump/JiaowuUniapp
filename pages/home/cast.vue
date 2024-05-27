@@ -31,7 +31,6 @@
 			},
 			async getcastinfo(){
 				let res = await castInfo.getcastinfo()
-				console.log(res)
 				if(res == 'error')
 					this.castinfo = {info:'获取失败'}
 				else

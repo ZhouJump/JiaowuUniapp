@@ -2,7 +2,7 @@
     "name" : "掌上莆院",
     "appid" : "__UNI__B3BC600",
     "description" : "",
-    "versionName" : "1.0.0",
+    "versionName" : "1.0.3",
     "versionCode" : "100",
     "transformPx" : false,
     /* 5+App特有相关 */
@@ -17,7 +17,11 @@
             "delay" : 0
         },
         /* 模块配置 */
-        "modules" : {},
+        "modules" : {
+            "Push" : {},
+            "Payment" : {},
+            "Geolocation" : {}
+        },
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */
@@ -46,7 +50,39 @@
             },
             /* SDK配置 */
             "sdkConfigs" : {
-                "ad" : {}
+                "ad" : {},
+                "push" : {
+                    "unipush" : {
+                        "version" : "2",
+                        "offline" : false,
+                        "icons" : {
+                            "small" : {
+                                "xxhdpi" : "D:/program/uniJiaowuAdmin/uni教务后台/static/logo.png"
+                            }
+                        },
+                        "mi" : {}
+                    }
+                },
+                "payment" : {
+                    "alipay" : {
+                        "__platform__" : [ "android" ]
+                    }
+                },
+                "maps" : {
+                    "amap" : {
+                        "name" : "amapYfHkAs9M",
+                        "appkey_ios" : "",
+                        "appkey_android" : "c0563d077dac8d7a6b4f5a3ff002f7bb"
+                    }
+                },
+                "geolocation" : {
+                    "amap" : {
+                        "name" : "amapYfHkAs9M",
+                        "__platform__" : [ "android" ],
+                        "appkey_ios" : "",
+                        "appkey_android" : "c0563d077dac8d7a6b4f5a3ff002f7bb"
+                    }
+                }
             },
             "splashscreen" : {
                 "androidStyle" : "default",
@@ -121,6 +157,9 @@
                 }
             },
             "https" : false
+        },
+        "unipush" : {
+            "enable" : true
         }
     },
     "vueVersion" : "3"

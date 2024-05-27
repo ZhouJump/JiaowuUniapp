@@ -70,7 +70,15 @@
 							  this.id = res.data.items[0].xh
 							  this.fx = res.data.items[0].zyfxmc
 							  this.zy = res.data.items[0].zymc
-							  userinfo.userlogin({name:res.data.items[0].xm,id:this.id = res.data.items[0].xh,zy:res.data.items[0].zymc})
+							  userinfo.userlogin({name:res.data.items[0].xm,id:this.id = res.data.items[0].xh,zy:res.data.items[0].zymc,balance:0})
+							  uni.getPushClientId({
+							  		success: (res) => {
+										userinfo.setcid({id:this.id,cid:res.cid})
+							  		},
+							  		fail(err) {
+							  			console.log(err)
+							  		}
+							  	})
 						  }
 							uni.setStorageSync('loginstate',this.loginstate)
 							uni.setStorageSync('username',this.name)

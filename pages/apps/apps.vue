@@ -24,6 +24,7 @@
 				  // {name:'商务合作',ico:'bi-piggy-bank-fill',url:'hezuo',color:'#ff9300'},
 				  {name:'考场查询',ico:'bi-newspaper',url:'kaoshi',color:'#EFC3CA'},
 				  //{name:'进制计算器',ico:'bi-calculator-fill',url:'jisuanqi',color:'#39D0D5'},
+				  {name:'二手交易',ico:'bi-bag-fill',url:'ershou/ershou',color:'#e4de16'},
 				  {name:'小组件管理',ico:'bi-map-fill',url:'zujian',color:'#4CAAE4'},
 						],
 
