@@ -2,7 +2,7 @@
     "name" : "掌上莆院",
     "appid" : "__UNI__B3BC600",
     "description" : "",
-    "versionName" : "1.0.3",
+    "versionName" : "1.0.5",
     "versionCode" : "100",
     "transformPx" : false,
     /* 5+App特有相关 */
@@ -20,7 +20,8 @@
         "modules" : {
             "Push" : {},
             "Payment" : {},
-            "Geolocation" : {}
+            "Geolocation" : {},
+            "Camera" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -122,6 +123,9 @@
                     }
                 }
             }
+        },
+        "uniStatistics" : {
+            "enable" : true
         }
     },
     /* 快应用特有相关 */
@@ -132,19 +136,32 @@
         "setting" : {
             "urlCheck" : false
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        "uniStatistics" : {
+            "enable" : true
+        }
     },
     "mp-alipay" : {
-        "usingComponents" : true
+        "usingComponents" : true,
+        "uniStatistics" : {
+            "enable" : true
+        }
     },
     "mp-baidu" : {
-        "usingComponents" : true
+        "usingComponents" : true,
+        "uniStatistics" : {
+            "enable" : true
+        }
     },
     "mp-toutiao" : {
-        "usingComponents" : true
+        "usingComponents" : true,
+        "uniStatistics" : {
+            "enable" : true
+        }
     },
     "uniStatistics" : {
-        "enable" : false
+        "enable" : true,
+        "version" : "2"
     },
     "h5" : {
         "devServer" : {
@@ -160,7 +177,49 @@
         },
         "unipush" : {
             "enable" : true
+        },
+        "uniStatistics" : {
+            "enable" : true
+        },
+        "title" : "掌上教务",
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : true
+            }
+        },
+        "router" : {
+            "base" : "/app/"
         }
     },
-    "vueVersion" : "3"
+    "vueVersion" : "3",
+    "mp-jd" : {
+        "uniStatistics" : {
+            "enable" : true
+        }
+    },
+    "mp-kuaishou" : {
+        "uniStatistics" : {
+            "enable" : true
+        }
+    },
+    "mp-lark" : {
+        "uniStatistics" : {
+            "enable" : true
+        }
+    },
+    "mp-qq" : {
+        "uniStatistics" : {
+            "enable" : true
+        }
+    },
+    "quickapp-webview-huawei" : {
+        "uniStatistics" : {
+            "enable" : true
+        }
+    },
+    "quickapp-webview-union" : {
+        "uniStatistics" : {
+            "enable" : true
+        }
+    }
 }

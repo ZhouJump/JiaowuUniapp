@@ -15,7 +15,8 @@
 	import appsVue from '../apps/apps.vue'
 	import userInfoVue from '../userInfo/userInfo.vue'
 	import homeVue from '../home/home.vue'
-	const user = uniCloud.importObject('userInfo')
+	import checkUpdate from '@/uni_modules/uni-upgrade-center-app/utils/check-update'
+	const user = uniCloud.importObject('userInfo',{customUI:true})
 	export default {
 		data() {
 			return {
@@ -83,6 +84,7 @@
 				plus.navigator.closeSplashscreen()
 			},600)
 			this.openpush()
+			checkUpdate()
 		}
 	}
 </script>

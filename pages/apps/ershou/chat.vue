@@ -1,14 +1,14 @@
 <template>
 	<view style="height: calc(100% - 140px);" class="page">
 		<view class="topbox">
-			<view class="title">{{user.name}}</view>
+			<view class="title">{{user.nickname}}</view>
 		</view>
 		<view class="appbox">
 			<scroll-view scroll-y="true" :scroll-top="scrollTop" @click="isadding=false" style="transition-duration: 200ms" :style="{height:isadding?'calc(100% - 180px)':'calc(100% - 60px)'}">
 				<view class="messagebox">
 					<view :class="[item.sent?'chatmy':'chatother']" v-for="item in message.message" class="message">
 						<view v-if="item.type=='text'">
-							<view :style="{filter: item.sent?'hue-rotate('+myid/360+'deg)':'hue-rotate('+id/360+'deg)'}" class="avtar">{{item.sent?name.slice(-1):user.name.slice(-1)}}</view>
+							<view :style="{filter: item.sent?'hue-rotate('+myid/360+'deg)':'hue-rotate('+id/360+'deg)'}" class="avtar">{{item.sent?name.slice(-1):user.nickname.slice(-1)}}</view>
 							<span class="text">{{item.text}}</span>
 						</view>
 						<view v-if="item.type=='goods'">
@@ -71,14 +71,14 @@
 					message = JSON.parse(message)
 				let ishave = false
 				message.msg.forEach((msg,index)=>{
-					if(msg.id == this.user.id){
+					if(msg.id == this.user.username){
 						ishave = true
 						message.msg[index].chat = chat
 						message.msg.unshift(message.msg.splice(index,1)[0])
 					}
 				})
 				if(ishave == false){
-					message.msg.unshift({id:this.user.id,name:this.user.name,chat:chat})
+					message.msg.unshift({id:this.user.username,name:this.user.nickname,chat:chat})
 				}
 				uni.setStorageSync('message',JSON.stringify(message))
 			},

@@ -18,7 +18,7 @@
 
 <script>
 	import base from "/common/base.js"
-	const userinfo = uniCloud.importObject('userInfo')
+	const userinfo = uniCloud.importObject('userInfo',{customUI:true})
 	export default {
 		data() {
 			return {

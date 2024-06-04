@@ -94,6 +94,11 @@
 									地址管理<i class="bi bi-geo-alt-fill"></i>
 								</view>
 							</navigator>
+							<navigator url="/pages/apps/ershou/shoucang">
+								<view class="navitem">
+									我的收藏<i class="bi bi-star-fill"></i>
+								</view>
+							</navigator>
 							<view class="navitem">
 								账户绑定<i class="bi bi-alipay"></i>
 							</view>
@@ -107,8 +112,8 @@
 </template>
 
 <script>
-	const goods = uniCloud.importObject('goods')
-	const user = uniCloud.importObject('userInfo')
+	const goods = uniCloud.importObject('goods',{customUI: true})
+	const user = uniCloud.importObject('userInfo',{customUI: true})
 	export default {
 		data() {
 			return {

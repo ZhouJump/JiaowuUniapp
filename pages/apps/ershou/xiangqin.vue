@@ -9,20 +9,38 @@
 			<view class="buttonpake">
 				<view @click="checkout" v-if="goods.state == 'selling'" class="buy">我要了 <i class="bi bi-bag-heart-fill"></i></view>
 				<view @click="gotochat" class="chat">聊一聊 <i class="bi bi-chat-dots-fill"></i></view>
+				<view @click="star" class="star"><i :class="[isstar?'bi-star-fill':'bi-star']" class="bi"></i></view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import { nextTick } from 'vue';
 	const goods = uniCloud.importObject('goods')
 	export default {
 		data() {
 			return {
-				goods:{title:'加载中'}
+				goods:{title:'加载中'},
+				id:uni.getStorageSync('userid'),
+				isstar:false,
 			}
 		},
 		methods: {
+			async star(){
+				let res = await goods.setstar({goodsid:this.goods._id,userid:this.id,star:!this.isstar})
+				if(res == 'success'){
+					uni.showToast({
+						title: '收藏成功'
+					});
+				}
+				else{
+					uni.showToast({
+						title: '收藏失败'
+					});
+				}
+				this.isstar = await goods.getstar({goodsid:this.goods.id,userid:this.id,star:!this.isstar})
+			},
 			gotochat(){
 				uni.navigateTo({
 					url:'/pages/apps/ershou/chat?id=' + this.goods.seller
@@ -36,6 +54,7 @@
 			 async getgoods(id){
 				 let res = await goods.getGoods(id)
 				 this.goods = res[0]
+				 this.isstar = await goods.getstar({goodsid:res[0]._id,userid:this.id})
 			 }
 		},
 		mounted() {
@@ -60,13 +79,22 @@
 		font-size: 16px;
 	}
 	.chat{
-		width: 100px;
+		width: 80px;
+		font-size: 14px;
 		height: 40px;
 		background-color: seagreen;
 		float: right;
 	}
+	.star{
+		font-size: 20px;
+		width: 40px;
+		height: 40px;
+		background-color: #ffa70e;
+		float: right;
+	}
 	.buy{
-		width: 100px;
+		font-size: 14px;
+		width: 80px;
 		height: 40px;
 		background-color: #615cff;
 		float: right;

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-	const castInfo = uniCloud.importObject('castInfo')
+	const castInfo = uniCloud.importObject('castInfo',{customUI:true})
 	export default {
 		data() {
 			return {

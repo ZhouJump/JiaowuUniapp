@@ -4,6 +4,98 @@ module.exports = {
 	_before: function () { // 通用预处理器
 
 	},
+	async setstar(data){
+		let ret = 0
+		const db= uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
+					clientInfo: this.getClientInfo()
+				})
+		db.setUser({role:['admin']})
+		await db.collection('star')
+			.where({goodsid:data.goodsid,userid:data.userid})
+			.get()
+			.then((res)=>{
+				if(res.code!=0)
+					ret = 'error'
+				else
+					ret = res
+			})
+			.catch((err)=>{
+				ret = 'error'
+			})
+			
+		if(ret.data.length==0){
+			await db.collection('star')
+				.add(data)
+				.then((res)=>{
+					if(res.code!=0)
+						ret = 'error'
+					else
+						ret = 'success'
+				})
+				.catch((err)=>{
+					ret = 'error'
+				})
+		}
+		else{
+			await db.collection('star')
+				.where({goodsid:data.goodsid,userid:data.userid})
+				.update(data)
+				.then((res)=>{
+					if(res.code!=0)
+						ret = 'error'
+					else
+						ret = 'success'
+				})
+				.catch((err)=>{
+					ret = 'error'
+				})
+		}
+		return ret
+	},
+	async getstar(data){
+		let ret = 0
+		const db= uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
+					clientInfo: this.getClientInfo()
+				})
+		db.setUser({role:['admin']})
+		await db.collection('star')
+			.where({goodsid:data.goodsid,userid:data.userid})
+			.get()
+			.then((res)=>{
+				if(res.code!=0)
+					ret = 'error'
+				else
+					ret = res
+			})
+			.catch((err)=>{
+				ret = 'error'
+			})
+			
+		if(ret.data.length == 0)
+			return false
+		else
+			return ret.data[0].star
+	},
+	async getmystar(data){
+		let ret = 0
+		const db= uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
+					clientInfo: this.getClientInfo()
+				})
+		db.setUser({role:['admin']})
+		await db.collection('star')
+			.where({userid:data.userid})
+			.get()
+			.then((res)=>{
+				if(res.code!=0)
+					ret = 'error'
+				else
+					ret = res
+			})
+			.catch((err)=>{
+				ret = 'error'
+			})
+		return ret.data
+	},
 	async delgoods(data){
 		let ret = 0
 		const db= uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
@@ -33,6 +125,46 @@ module.exports = {
 		await db.collection('goodsTable')
 			.doc(data._id)
 			.update({"state":"waitget"})
+			.then((res)=>{
+				if(res.code!=0)
+					ret = 'error'
+				else
+					ret = 'sucess'
+			})
+			.catch((err)=>{
+				ret = 'error'
+			})	
+		return ret
+	},
+	async hidegoods(data){
+		let ret = 0
+		const db= uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
+					clientInfo: this.getClientInfo()
+				})
+		db.setUser({role:['admin']})
+		await db.collection('goodsTable')
+			.doc(data._id)
+			.update({"state":"hide"})
+			.then((res)=>{
+				if(res.code!=0)
+					ret = 'error'
+				else
+					ret = 'sucess'
+			})
+			.catch((err)=>{
+				ret = 'error'
+			})	
+		return ret
+	},
+	async unhidegoods(data){
+		let ret = 0
+		const db= uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
+					clientInfo: this.getClientInfo()
+				})
+		db.setUser({role:['admin']})
+		await db.collection('goodsTable')
+			.doc(data._id)
+			.update({"state":"selling"})
 			.then((res)=>{
 				if(res.code!=0)
 					ret = 'error'
@@ -81,8 +213,8 @@ module.exports = {
 				ret = 'error'
 			})
 		let add = 0
-		await db.collection('userTable')
-			.where({"id":userid})
+		await db.collection('uni-id-users')
+			.where({"username":userid})
 			.get()
 			.then((res)=>{
 				if(res.code!=0)
@@ -97,8 +229,8 @@ module.exports = {
 				ret = 'error'
 			})
 		add = add + price
-		await db.collection('userTable')
-			.where({"id":userid})
+		await db.collection('uni-id-users')
+			.where({"username":userid})
 			.update({"balance":add})
 			.then((res)=>{
 				if(res.code!=0)
@@ -158,8 +290,8 @@ module.exports = {
 				ret = 'error'
 			})
 			
-			let user = await db.collection('userTable')
-			.where({"id":data.id})
+			let user = await db.collection('uni-id-users')
+			.where({"username":data.id})
 			.get()
 			
 			const uniPush = uniCloud.getPushManager({appId:"__UNI__B3BC600"})
@@ -198,6 +330,41 @@ module.exports = {
 		if(id == null){
 			await db.collection('goodsTable')
 				.where({state:"selling"})
+				.get()
+				.then((res)=>{
+						if(res.code!=0)
+							ret = 'error'
+						else
+							ret = res.data
+					})
+					.catch((err)=>{
+						ret = 'error'
+					})	
+		}
+		else{
+			await db.collection('goodsTable')
+				.doc(id)
+				.get()
+				.then((res)=>{
+						if(res.code!=0)
+							ret = 'error'
+						else
+							ret = res.data
+					})
+					.catch((err)=>{
+						ret = 'error'
+					})	
+		}
+			return ret
+	},
+	async getAllGoods(id){
+		let ret = 0
+		const db= uniCloud.databaseForJQL({ // 获取JQL database引用，此处需要传入云对象的clientInfo
+					clientInfo: this.getClientInfo()
+				})
+		db.setUser({role:['admin']})
+		if(id == null){
+			await db.collection('goodsTable')
 				.get()
 				.then((res)=>{
 						if(res.code!=0)

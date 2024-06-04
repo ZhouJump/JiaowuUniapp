@@ -33,6 +33,7 @@ function getWeek()
 	return "7123456".charAt(new Date().getDay());alert(str);
 }
 
+
 export default {
 	baseUrl,
 	getWeekInYear,
