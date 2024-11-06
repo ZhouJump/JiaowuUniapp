@@ -1,0 +1,14 @@
+image: node:latest
+
+stages:
+  - deploy
+
+pages:
+  stage: deploy
+  script:
+    - rm -rf public
+    - mkdir public && cp -rf unpackage/dist/build/web/* public
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
