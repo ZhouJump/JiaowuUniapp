@@ -173,7 +173,7 @@
                     }
                 }
             },
-            "https" : false
+            "https" : true
         },
         "unipush" : {
             "enable" : true
@@ -181,14 +181,15 @@
         "uniStatistics" : {
             "enable" : true
         },
-        "title" : "掌上教务",
+        "title" : "掌上莆院",
         "optimization" : {
             "treeShaking" : {
                 "enable" : true
             }
         },
         "router" : {
-            "base" : "/app/"
+            "base" : "",
+            "mode" : "hash"
         }
     },
     "vueVersion" : "3",
