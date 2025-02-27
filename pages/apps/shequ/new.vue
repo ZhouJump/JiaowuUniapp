@@ -2,9 +2,9 @@
 	<view class="out-box">
 		<uv-pick-color ref="pickerColor" @confirm="confirm"></uv-pick-color>
 		<view class="head">
-			<text class="button">返回</text>
+			<text @click="goToBack()" class="button">返回</text>
 			<text>{{ title===''?'新建帖子':title }}</text>
-			<text class="button">发布</text>
+			<text @click="sent()" class="button">发布</text>
 		</view>
 		<view class="outter">
 			<view class="cont">
@@ -13,7 +13,7 @@
 				<view class="editor-wrapper">
 					<view class="editor-inner">
 						<editor id="editor" class="ql-container" placeholder="输入正文" show-img-size show-img-toolbar
-							show-img-resize @statuschange="onStatusChange" :read-only="readOnly" @ready="onEditorReady">
+							show-img-resize @input="getEditorContent" @statuschange="onStatusChange" :read-only="readOnly" @ready="onEditorReady">
 						</editor>
 					</view>
 				</view>
@@ -103,6 +103,7 @@
 </template>
 
 <script>
+	const community = uniCloud.importObject('community',{customUI: true})
 	export default {
 		data() {
 			return {
@@ -110,10 +111,39 @@
 					cover:'/static/addimage.png',
 					title:'',
 					readOnly: false,
-					formats: {}
+					content:'',
+					formats: {},
 				}
 		},
 		methods: {
+			async sent(){
+				if(this.cover!== '/static/addimage.png' && this.title!=='' && this.content !== '')
+				{
+					console.log('发布')
+					let res = await community.sentNote({
+						title:this.title,
+						cover:this.cover,
+						content:this.content,
+						view:0,
+						comment:[]
+					})
+					if(res === 'suceess'){
+						uni.showToast({
+							title:'发布成功',
+							icon:'none'
+						})
+						this.goToBack()
+					}
+				}else{
+					uni.showToast({
+						title:'请检查是否上传封面，输入标题和正文',
+						icon:'none'
+					})
+				}
+			},
+			getEditorContent(e) {
+				this.content = e.detail.html;
+			},
 			goToBack(){
 				uni.navigateBack({
 					delta: 1

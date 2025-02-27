@@ -1,7 +1,7 @@
 {
   "version": "1",
   "env": {
-    "compilerVersion": "4.45.2025010502"
+    "compilerVersion": "4.29.2024093009"
   },
   "files": {
     "utssdk/app-android/TransparentActivity.uts": {

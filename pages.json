@@ -232,6 +232,13 @@
 			{
 				"navigationBarTitleText" : ""
 			}
+		},
+		{
+			"path" : "pages/apps/shequ/detail",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
 ],
 

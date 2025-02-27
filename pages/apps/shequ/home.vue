@@ -5,18 +5,18 @@
 		</view>
 		<view class="outter">
 			<view class="cont">
-				<view class="item" v-for="item in items">
+				<navigator :url="'/pages/apps/shequ/detail?id='+item._id" class="item" v-for="item in items">
 					<view class="cover">
-						<image mode="aspectFill" :src="item.img"></image>
+						<image mode="aspectFill" :src="item.cover"></image>
 						<view class="box">
 							<view><i class="bi bi-eye"></i> {{ item.view }}</view>
-							<view><i class="bi bi-chat-left-text"></i> {{ item.comm }}</view>
+							<view><i class="bi bi-chat-left-text"></i> {{ item.comment.length }}</view>
 						</view>
 					</view>
 					<view class="title">
 						{{ item.title }}
 					</view>
-				</view>
+				</navigator>
 			</view>
 		</view>
 		<view class="bottom">
@@ -34,75 +34,29 @@
 </template>
 
 <script>
+	const community = uniCloud.importObject('community',{customUI: true})
 	export default {
 		data() {
 			return {
 				items:[
 					{
-						img:'https://mp-959701fe-151c-4c72-bb61-d21f69764990.cdn.bspapp.com/cloudstorage/fd0ec1b0-030e-4a61-863a-dea1ce4ece55.jpg',
-						title:'家人们谁懂啊',
-						view:666,
-						comm:333,
-						id:'000'
-					},
-					{
-						img:'https://mp-959701fe-151c-4c72-bb61-d21f69764990.cdn.bspapp.com/cloudstorage/fd0ec1b0-030e-4a61-863a-dea1ce4ece55.jpg',
-						title:'家人们谁懂啊',
-						view:666,
-						comm:333,
-					},
-					{
-						img:'https://mp-959701fe-151c-4c72-bb61-d21f69764990.cdn.bspapp.com/cloudstorage/fd0ec1b0-030e-4a61-863a-dea1ce4ece55.jpg',
-						title:'家人们谁懂啊',
-						view:666,
-						comm:333,
-					},
-					{
-						img:'https://mp-959701fe-151c-4c72-bb61-d21f69764990.cdn.bspapp.com/cloudstorage/fd0ec1b0-030e-4a61-863a-dea1ce4ece55.jpg',
-						title:'家人们谁懂啊',
-						view:666,
-						comm:333,
-					},
-					{
-						img:'https://mp-959701fe-151c-4c72-bb61-d21f69764990.cdn.bspapp.com/cloudstorage/fd0ec1b0-030e-4a61-863a-dea1ce4ece55.jpg',
-						title:'家人们谁懂啊',
-						view:666,
-						comm:333,
-					},
-					{
-						img:'https://mp-959701fe-151c-4c72-bb61-d21f69764990.cdn.bspapp.com/cloudstorage/fd0ec1b0-030e-4a61-863a-dea1ce4ece55.jpg',
-						title:'家人们谁懂啊',
-						view:666,
-						comm:333,
-					},
-					{
-						img:'https://mp-959701fe-151c-4c72-bb61-d21f69764990.cdn.bspapp.com/cloudstorage/fd0ec1b0-030e-4a61-863a-dea1ce4ece55.jpg',
-						title:'家人们谁懂啊',
-						view:666,
-						comm:333,
-					},
-					{
-						img:'https://mp-959701fe-151c-4c72-bb61-d21f69764990.cdn.bspapp.com/cloudstorage/fd0ec1b0-030e-4a61-863a-dea1ce4ece55.jpg',
-						title:'家人们谁懂啊',
-						view:666,
-						comm:333,
-					},
-					{
-						img:'https://mp-959701fe-151c-4c72-bb61-d21f69764990.cdn.bspapp.com/cloudstorage/fd0ec1b0-030e-4a61-863a-dea1ce4ece55.jpg',
-						title:'家人们谁懂啊',
-						view:666,
-						comm:333,
-					},
-					{
-						img:'https://mp-959701fe-151c-4c72-bb61-d21f69764990.cdn.bspapp.com/cloudstorage/fd0ec1b0-030e-4a61-863a-dea1ce4ece55.jpg',
-						title:'家人们谁懂啊',
-						view:666,
-						comm:333,
-					},
+						comment:[],
+						view:0,
+						title:'',
+						cover:''
+					}
 				]
 			}
 		},
+		onLoad() {
+			this.getAllNote()
+		},
 		methods: {
+			async getAllNote(){
+				let res = await community.getNote()
+				console.log(res)
+				this.items = res.data
+			},
 			goToNew(){
 				uni.navigateTo({
 					url: '/pages/apps/shequ/new',
