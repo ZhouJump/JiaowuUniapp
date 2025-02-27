@@ -1,6 +1,7 @@
 <template>
-	<view>
-		<web-view id="iframe" :src="baseUrl"></web-view>
+	<view class="cont">
+		<view class="text">请在下方完成正方教务系统登录</view>
+		<iframe class="iframe" :src="baseUrl"></iframe>
 		<view @click="back" class="okbutton">完成登录？点我返回</view>
 	</view>
 </template>
@@ -14,45 +15,37 @@
 			}
 		},
 		methods: {
-			start(){
-				this.timer = setInterval(this.checkLogin, 500);
-			  },
-			checkLogin(){
-				var pages = getCurrentPages();  
-				var page = pages[pages.length - 1];
-				// #ifdef APP-PLUS
-				var currentWebview = page.$getAppWebview();
-				// #endif
-				if(currentWebview.children()[0].getURL()!=base.baseUrl+'xtgl/login_slogin.html')
-					uni.navigateBack(1)
-			},
 			back()
 			{
 				uni.navigateBack(2)
 			}
 		},
 		mounted() {
-		        this.start()
-		    },
-		onUnload() {
-			clearInterval(this.timer)
-		}
+		},
 	}
 </script>
 
 <style scoped>
-	iframe
+	.cont{
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	.text{
+		height: 40px;
+		line-height: 40px;
+		margin: 40px 20px 0;
+	}
+	.iframe
 	{
 		width: 100%;
-		height: 500px;
+		flex: 1;
 		border: none;
 	}
 	.okbutton
 	{
-		position: absolute;
-		bottom: 120px;
+		margin: 20px auto 60px;
 		width: calc(100% - 40px);
-		left: 20px;
 		height: 46px;
 		text-align: center;
 		line-height: 46px;

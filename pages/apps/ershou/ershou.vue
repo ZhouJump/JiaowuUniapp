@@ -61,7 +61,7 @@
 							<view class="namebox">{{ name }}</view>
 							<view class="idbox">{{ id }}</view>
 							<view class="infocard">
-								<view class="balance">余额:￥{{userinfo.balance}}</view>
+								<view class="balance">余额:￥{{Math.round(userinfo.balance)}}</view>
 								<view class="getbalance">取现 <i class="bi bi-upload"></i></view>
 							</view>
 							<view class="icolist">

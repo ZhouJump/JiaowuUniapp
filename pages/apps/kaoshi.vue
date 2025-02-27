@@ -43,6 +43,7 @@ import base from '../../common/base'
 				tern:'3',
 				year:'2023',
 				yearlist:[
+					{text:'2024-2025',id:'2024'},
 					{text:'2023-2024',id:'2023'},
 					{text:'2022-2023',id:'2022'},
 					{text:'2021-2022',id:'2021'},

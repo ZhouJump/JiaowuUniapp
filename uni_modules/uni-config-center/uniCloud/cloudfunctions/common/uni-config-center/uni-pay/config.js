@@ -5,8 +5,6 @@ module.exports = {
 	"notifyUrl": {
 		// 测试环境服务空间-支付回调地址
 		"mp-959701fe-151c-4c72-bb61-d21f69764990": "https://fc-mp-959701fe-151c-4c72-bb61-d21f69764990.next.bspapp.com/uni-pay-co",
-		// 线上环境服务空间-支付回调地址（如果只有一个服务空间，则只需要配置线上环境服务空间即可）
-		"mp-959701fe-151c-4c72-bb61-d21f69764990": "https://fc-mp-959701fe-151c-4c72-bb61-d21f69764990.next.bspapp.com/uni-pay-co",
 	},
 	// 支付宝相关（加签方式选证书模式，加密算法选RSA2）
 	"alipay": {
@@ -14,25 +12,10 @@ module.exports = {
 		// 支付宝 - APP支付配置
 		"app": {
 			"appId": "9021000137620309", // 支付宝开放平台下应用的appid
-			"privateKey": "MIIEogIBAAKCAQEAh0GZEQOOuaqJHVUctSdtoIIBpLv0P18cWwHKpFrLDlfVKxYZPblTXH9Ud2+tOBCKKPaK214yv2wulgVv+xSJalhtitce5J49jQWymSfVBzn3uYMXt4sWRWAevA+NexQKlPrXGnyrMcUMO0243JmNQew8pxQbsVUwsItGk7nQJpQbhIHUax7V+Y3tDG6cqSAt3vNEQZEyVJvGZk8vrfZw+EJpI74BphBfRaLlZeWfsVDFruHGuqdmZGUEqSWzs2vG+B5QN/xNXV29vegtWaVrv1xDktDGwIGoSmUW4HQDrufr0YpSVR38cAQU68SwU8dY9Io7rlkwMZ/+qJBFHVMalQIDAQABAoIBAHp2cGqxN+bve1otl+KFooKzc11+ODWwnfHge2O4OSXxbLaoOY5jYBDd0NKbMNEUWKOiJjNc5MHg54U5wxwoigrZqcUN5ZDFnaEzyXNWV1FFsQAsq6qpqi6CSxGnW0hW6wXc4CnBOxfC+8IuKvTBqt5HUNtOH4y+P2l5kRtsIATsuuIRzrL5cTMbB+38WI0szf9lKE10OZXHBhzykq+4zPInQJib82Tcpik0u82IHX3E8N45cHsdkAdwd4oYbM1QJe4cigAgzQ1o9qM+tCRe5myAmChsrJfjk81KrvmVdJc+tm0am+WSZxWPnfeofqy1qGpbTvikkykuREnY1eDyk4ECgYEA3Lvi4oSrMt11DwT6xD7OSJGVqQXfODbNCt/m4VgZR8FRkD3zudY6j50EoN896XrLq2ntehElK5qo74xJmHVBenZBeE/PRa+VyWrgHC4aV3nDeiVsVhZVi83WbnGQCqTD1v5PNZZ1jRfltR7g4Z+lBibOGyK22M/j0sskYMYqpaUCgYEAnN2jEx3fRwGkHDF9U2iUaHR/7GHFSrT6EvmwuhQiSjkoUR6dhjfyaQx7JSsznnnzN5wnJys0Ozt9vLGXCi09lj7gmKgqfPT70f/HEiqW8tj1jKKIKp2pAroEJswB/9X8BT4mt/9IzVONFse6Xyy1MYpj7dyUlGUr8psAtaBi7jECgYAK8WGZGzylg+cWvId2DSsK2/TQcVMUpVra7Ci1CToPnZzeisO3ddBnaEBffVHDbmwEbnbwc0Mle0Bex9SqMz3wxUYPod1DtiW124+KthpmNcokFxDc37ST/rtftE+Qx4RR9z+UB4aCXSntJb++T7zNpkTXgYwRCZVg0ONXzNs2ZQKBgCKrpgByqMfT6AbHNXD6+1o+7Ys8bNO/Pkp1X4cxLgcDrRKI1r40nWJ0fL9RVh5fy87tt4Wjue6hjn/nLH/2UddkXFXBTWrC5umaQ9CTEzvnkhYcUkZBBHryzDoa+xIlpIcwHnSqetfO8K8pQ9sHUaD6em23RCusVNNRSQ3bviHxAoGAG+oso2ZhsiYrcCgx3lo34lh1KSS4xxS4ctANJRBpS7rxEy7I2Ng/KykfkutLkUWZU00HcCL1hzOUYRxvlfpBUfZiXLqAHSmcvNC4m6nugv7BFrKm9wCVW2p135NvBhePILO9/Jaowtly5pH8xEemTJ1bgouJqo2fwQtqTcTzHhY=", // 支付宝商户私钥
-			"appCertPath": path.join(__dirname, 'alipay/appCertPublicKey.crt'), // 支付宝商户公钥路径
-			"alipayPublicCertPath": path.join(__dirname, 'alipay/alipayCertPublicKey_RSA2.crt'), // 支付宝公钥路径
+			"privateKey": "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCHQZkRA465qokdVRy1J22gggGku/Q/XxxbAcqkWssOV9UrFhk9uVNcf1R3b604EIoo9orbXjK/bC6WBW/7FIlqWG2K1x7knj2NBbKZJ9UHOfe5gxe3ixZFYB68D417FAqU+tcafKsxxQw7TbjcmY1B7DynFBuxVTCwi0aTudAmlBuEgdRrHtX5je0MbpypIC3e80RBkTJUm8ZmTy+t9nD4QmkjvgGmEF9FouVl5Z+xUMWu4ca6p2ZkZQSpJbOza8b4HlA3/E1dXb296C1ZpWu/XEOS0MbAgahKZRbgdAOu5+vRilJVHfxwBBTrxLBTx1j0ijuuWTAxn/6okEUdUxqVAgMBAAECggEAenZwarE35u97Wi2X4oWigrNzXX44NbCd8eB7Y7g5JfFstqg5jmNgEN3Q0psw0RRYo6ImM1zkweDnhTnDHCiKCtmpxQ3lkMWdoTPJc1ZXUUWxACyrqqmqLoJLEadbSFbrBdzgKcE7F8L7wi4q9MGq3kdQ204fjL4/aXmRG2wgBOy64hHOsvlxMxsH7fxYjSzN/2UoTXQ5lccGHPKSr7jM8idAmJvzZNymKTS7zYgdfcTw3jlwex2QB3B3ihhszVAl7hyKACDNDWj2oz60JF7mbICYKGysl+OTzUqu+ZV0lz62bRqb5ZJnFY+d96h+rLWoaltO+KSTKS5ESdjV4PKTgQKBgQDcu+LihKsy3XUPBPrEPs5IkZWpBd84Ns0K3+bhWBlHwVGQPfO51jqPnQSg3z3pesurae16ESUrmqjvjEmYdUF6dkF4T89Fr5XJauAcLhpXecN6JWxWFlWLzdZucZAKpMPW/k81lnWNF+W1HuDhn6UGJs4bIrbYz+PSyyRgxiqlpQKBgQCc3aMTHd9HAaQcMX1TaJRodH/sYcVKtPoS+bC6FCJKOShRHp2GN/JpDHslKzOeefM3nCcnKzQ7O328sZcKLT2WPuCYqCp89PvR/8cSKpby2PWMoogqnakCugQmzAH/1fwFPia3/0jNU40Wx7pfLLUximPt3JSUZSvymwC1oGLuMQKBgArxYZkbPKWD5xa8h3YNKwrb9NBxUxSlWtrsKLUJOg+dnN6Kw7d10GdoQF99UcNubARudvBzQyV7QF7H1KozPfDFRg+h3UO2JbXbj4q2GmY1yiQXENzftJP+u1+0T5DHhFH3P5QHhoJdKe0lv75PvM2mRNeBjBEJlWDQ41fM2zZlAoGAIqumAHKox9PoBsc1cPr7Wj7tizxs078+SnVfhzEuBwOtEojWvjSdYnR8v1FWHl/Lzu23haO57qGOf+csf/ZR12RcVcFNasLm6ZpD0JMTO+eSFhxSRkEEevLMOhr7EiWkhzAedKp6187wrylD2wdRoPp6bbdEK6xU01FJDdu+IfECgYAb6iyjZmGyJitwKDHeWjfiWHUpJLjHFLhy0A0lEGlLuvETLsjY2D8rKR+S60uRRZlTTQdwIvWHM5RhHG+V+kFR9mJcuoAdKZy80Libqe6C/sEWsqb3AJVbanXfk28GF48gs738lqjC2XLmkfzER6ZMnVuCi4mqjZ/BC2pNxPMeFg==", // 支付宝商户私钥
+			"appCertPath": path.join(__dirname, 'alipay/appPublicCert.crt'), // 支付宝商户公钥路径
+			"alipayPublicCertPath": path.join(__dirname, 'alipay/alipayPublicCert.crt'), // 支付宝公钥路径
 			"alipayRootCertPath": path.join(__dirname, 'alipay/alipayRootCert.crt'), // 支付宝根证书路径
-		},
-	"wxpay": {
-			"enable": false, // 是否启用微信支付
-			// 微信 - APP支付
-			"app": {
-				"appId": "", // app开放平台下的应用的appid
-				"secret": "", // app开放平台下的应用的secret
-				"mchId": "", // 商户id
-				"key": "", // v2的api key
-				"pfx": fs.readFileSync(__dirname + '/wxpay/apiclient_cert.p12'), // v2需要用到的证书
-				"v3Key": "", // v3的api key
-				"appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
-				"appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
-				"version": 2, // 启用支付的版本 2代表v2版本 3 代表v3版本
-			},
-		},
+		}
 	}
 }

@@ -218,6 +218,20 @@
 			{
 				"navigationBarTitleText" : ""
 			}
+		},
+		{
+			"path" : "pages/apps/shequ/home",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/apps/shequ/new",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
 ],
 

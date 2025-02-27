@@ -15,9 +15,10 @@
         ]
     },
     "dependencies": {
-        "bootstrap-icons": "^1.11.3"
+        "bootstrap-icons": "^1.11.3",
+		"province-city-china": "^8.5.7"
     },
     "devDependencies": {
-        "province-city-china": "^8.5.7"
+        
     }
 }
