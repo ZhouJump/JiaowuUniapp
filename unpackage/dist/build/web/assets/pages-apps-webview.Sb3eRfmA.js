@@ -1,0 +1,1 @@
+import{c as r,K as s,o as t}from"./index-C5AUwsom.js";import{_ as e}from"./_plugin-vue_export-helper.BCo6x5W8.js";const o=e({data:()=>({src:""}),methods:{},onLoad(r){let s=r.url.indexOf("http",6);this.src=r.url.slice(s)}},[["render",function(e,o,n,a,c,l){const i=s;return t(),r(i,{progress:"","update-title":"",src:c.src},null,8,["src"])}]]);export{o as default};

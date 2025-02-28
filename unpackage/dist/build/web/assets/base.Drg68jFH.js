@@ -1,1 +1,0 @@
-const e={baseUrl:"http://2944jr3335.51vip.biz/jwglxt/",getWeekInYear:function(){var e=new Date,t=e.getFullYear(),a=new Date(t,0,1),r=a.getDay(),n=0;1!=r&&(n=1,r?a.setDate(8-r):a.setDate(1));var D=e-a,c=Math.ceil(D/864e5)+r;return Math.ceil(c/7)+n},getWeek:function(){return"7123456".charAt((new Date).getDay())},startWeek:8};export{e as b};

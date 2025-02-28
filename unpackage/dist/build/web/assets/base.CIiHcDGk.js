@@ -1,0 +1,1 @@
+const e={baseUrl:"https://172-16-9-206.webvpn.ptu.edu.cn/jwglxt/",getWeekInYear:function(){var e=new Date,t=e.getFullYear(),a=new Date(t,0,1),n=a.getDay(),r=0;1!=n&&(r=1,n?a.setDate(8-n):a.setDate(1));var c=e-a,s=Math.ceil(c/864e5)+n;return Math.ceil(s/7)+r},getWeek:function(){return"7123456".charAt((new Date).getDay())},startWeek:35};export{e as b};
