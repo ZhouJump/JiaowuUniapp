@@ -160,7 +160,4 @@
 		width: 100%;
 		height: 240px;
 	}
-	.cont .item:last-child{
-		margin-right: auto;
-	}
 </style>

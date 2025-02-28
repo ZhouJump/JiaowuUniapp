@@ -13,3 +13,5 @@ unpackage/dist/dev/
 
 # python
 *.pyc
+unpackage/dist/cache
+unpackage/cache

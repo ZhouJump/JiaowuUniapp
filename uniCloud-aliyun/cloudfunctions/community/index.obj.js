@@ -28,7 +28,12 @@ module.exports = {
 				})
 		db.setUser({role:['admin']})
 		await db.collection('noteTable')
-		.add({...note})
+		.add({
+			...note,
+			like:0,
+			view:0,
+			comment:[],
+		})
 		.then((res)=>{
 				if(res.code!=0)
 					ret = 'error'
