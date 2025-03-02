@@ -42,6 +42,16 @@ module.exports = {
 		return 'sucess'
 	},
 	
+	async changeWeight(_id,weight){
+		const db= uniCloud.database()
+		let res = await db.collection('noteTable')
+		.doc(_id)
+		.update({
+			like:weight
+		})
+		return 'sucess'
+	},
+	
 	async delNote(id){
 		const db= uniCloud.database()
 		let res = await db.collection('noteTable')

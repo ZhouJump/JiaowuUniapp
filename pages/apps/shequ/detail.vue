@@ -322,8 +322,7 @@
 		margin: 20px;
 	}
 	.cont{
-		padding: 10px;
-		width: calc(100% - 20px);
+		width: 100%;
 	}
 	.cont .goods{
 		display: flex;
@@ -333,6 +332,7 @@
 		height: 100px;
 		border-radius: 10px;
 		margin-right: 10px;
+		margin-left: 20px;
 	}
 	.goods .text{
 		display: flex;
@@ -351,6 +351,7 @@
 	.goods .buy{
 		margin-left: auto;
 		margin-top: 40px;
+		margin-right: 20px;
 	}
 	.cont .editor{
 		width: 100%;
