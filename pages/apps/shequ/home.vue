@@ -3,9 +3,9 @@
 		<view class="head">
 			校园圈
 		</view>
-		<view class="outter">
+		<scroll-view @refresherrefresh="refresh" @scrolltolower="getAllNote" refresher-enabled="true" :refresher-triggered="refresher" scroll-y="true" class="outter">
 			<view class="cont">
-				<navigator :url="'/pages/apps/shequ/detail?id='+item._id" class="item" v-for="item in items">
+				<view @click="goto('/pages/apps/shequ/detail?id='+item._id)" class="item" v-for="item in items">
 					<view class="cover">
 						<image mode="aspectFill" :src="item.cover"></image>
 						<view class="box">
@@ -16,9 +16,10 @@
 					<view class="title">
 						{{ item.title }}
 					</view>
-				</navigator>
+				</view>
+				<view class="loading">{{more?'加载中...':'没有更多了'}}</view>
 			</view>
-		</view>
+		</scroll-view>
 		<view class="bottom">
 			<view class="item">
 				主页
@@ -26,7 +27,7 @@
 			<view @click="goToNew" class="item sent">
 				<i class="bi bi-plus-lg"></i>
 			</view>
-			<view class="item">
+			<view @click="gotoMyInfo" class="item">
 				我的
 			</view>
 		</view>
@@ -39,23 +40,46 @@
 		data() {
 			return {
 				items:[
-					{
-						comment:[],
-						view:0,
-						title:'',
-						cover:''
-					}
-				]
+				],
+				id:uni.getStorageSync('userid'),
+				current_page:1,
+				refresher:false,
+				more:true,
 			}
 		},
 		onLoad() {
 			this.getAllNote()
+			// this.checklogin()
 		},
 		methods: {
-			async getAllNote(){
-				let res = await community.getNote()
-				console.log(res)
+			gotoMyInfo(){
+				uni.redirectTo({
+					url:"/pages/apps/shequ/myInfo"
+				})
+			},
+			goto(url){
+				uni.navigateTo({
+					url:url
+				})
+			},
+			async refresh(){
+				this.refresher = true
+				this.more = true
+				this.current_page = 1
+				let res = await community.getNote(null,this.current_page)
+				this.refresher = false
+				this.current_page += 1
 				this.items = res.data
+			},
+			async getAllNote(){
+				if(!this.more)
+				     return
+				let res = await community.getNote(null,this.current_page)
+				this.current_page += 1
+				this.items = [...this.items,...res.data]
+				if(res.data.length < 7){
+					this.more = false
+				}
 			},
 			goToNew(){
 				uni.navigateTo({
@@ -64,7 +88,24 @@
 					fail: () => {},
 					complete: () => {}
 				});
-			}
+			},
+			checklogin(){
+				if(this.id==='')
+				{
+					uni.showModal({
+						title:'请先登录',
+						success: (res) => {
+							uni.navigateBack(1)
+							if(res.confirm)
+								{
+									uni.navigateTo({
+										url:'/pages/login/login'
+									})
+								}
+						}
+					})
+				}
+			},
 		}
 	}
 </script>
@@ -108,7 +149,7 @@
 	}
 	.outter{
 		flex: 1;
-		overflow-y: scroll;
+		overflow-y: hidden;
 	}
 	.cont{
 		padding: 10px;
@@ -128,6 +169,11 @@
 		background-color: white;
 		border-radius: 8px;
 		box-shadow: 0 0 2px 1px #e6e6e6;
+	}
+	.cont .loading{
+		width: 100%;
+		padding: 20px 0 50px;
+		text-align: center;
 	}
 	.cont .item .title{
 		height: 40px;

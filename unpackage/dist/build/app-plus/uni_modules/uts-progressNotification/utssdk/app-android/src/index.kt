@@ -222,7 +222,7 @@ open class FinishNotificationProgressOptionsJSONObject : UTSJSONObject() {
 open class TransparentActivityByJs : TransparentActivity {
     constructor() : super() {}
     open fun onCreateByJs(savedInstanceState: Bundle?) {
-        return this.onCreate(savedInstanceState);
+        return onCreate(savedInstanceState);
     }
 }
 fun createNotificationProgressByJs(options: CreateNotificationProgressOptionsJSONObject): Unit {

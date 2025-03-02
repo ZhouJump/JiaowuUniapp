@@ -7,7 +7,7 @@
   "id": "__UNI__B3BC600",
   "name": "掌上莆院",
   "version": {
-    "name": "1.0.8",
+    "name": "1.0.9",
     "code": "100"
   },
   "description": "",
@@ -170,7 +170,7 @@
     "uni-app": {
       "control": "uni-v3",
       "vueVersion": "3",
-      "compilerVersion": "4.45",
+      "compilerVersion": "4.29",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
       "nvue": {
@@ -180,16 +180,6 @@
       "webView": {
         "minUserAgentVersion": "49.0"
       }
-    }
-  },
-  "app-harmony": {
-    "useragent": {
-      "value": "uni-app",
-      "concatenate": true
-    },
-    "uniStatistics": {
-      "enable": true,
-      "version": "2"
     }
   },
   "launch_path": "__uniappview.html"

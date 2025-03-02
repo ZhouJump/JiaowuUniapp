@@ -13,6 +13,14 @@
 				<editor id="editor" class="ql-container" placeholder="输入正文" show-img-size show-img-toolbar
 					 @input="getEditorContent" @statuschange="onStatusChange" :read-only="readOnly" @ready="onEditorReady">
 				</editor>
+				<view v-if="goods.title" class="goods">
+					<image class="cover" mode="aspectFill" :src="goods.imgUrl"></image>
+					<view class="text">
+						<view class="goods-name">{{goods.title}}</view>
+						<view class="goods-price">￥{{goods.price}}</view>
+					</view>
+					<view class="buy"><view class="inner">立即购买</view></view>
+				</view>
 			</view>
 		</view>
 		<view class="bottom">
@@ -84,6 +92,25 @@
 			
 				<view :class="formats.direction === 'rtl' ? 'ql-active' : ''" class="bi bi-paragraph"
 					data-name="direction" data-value="rtl"></view>
+				<view @click="goodsPop=true" class="bi bi-cart"></view>
+			</view>
+		</view>
+		<view :style="{bottom: goodsPop?'0px':'-420px'}" class="goods-list">
+			<view class="goods-head">
+				<view style="opacity: 0;">返回</view>
+				<view>我的商品</view>
+				<view @click="goodsPop=false">返回</view>
+			</view>
+			<view id="goods" class="body">
+				<view v-for="goodsItem in mysell" class="goods-item">
+					<image mode="aspectFill" class="image" :src="goodsItem.imgUrl"></image>
+					<view class="text">
+						<view class="goods-name">{{goodsItem.title}}</view>
+						<view class="goods-price">￥{{goodsItem.price}}</view>
+					</view>
+					<view v-if="goods._id === goodsItem._id" @click="goods={}" class="insert-goods">移除商品</view>
+					<view v-else @click="insertGoods(goodsItem)" class="insert-goods">插入商品</view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -91,6 +118,8 @@
 
 <script>
 	const community = uniCloud.importObject('community',{customUI: true})
+	const user = uniCloud.importObject('userInfo',{customUI: true})
+	import DomToImage from 'dom-to-image'
 	export default {
 		data() {
 			return {
@@ -100,8 +129,14 @@
 					readOnly: false,
 					content:'',
 					formats: {},
-					studentid:uni.getStorageSync('userid')
+					mysell:[],
+					goodsPop:false,
+					studentid:uni.getStorageSync('userid'),
+					goods:{}
 				}
+		},
+		onLoad() {
+			this.getmysell()
 		},
 		methods: {
 			async sent(){
@@ -112,6 +147,8 @@
 						title:this.title,
 						cover:this.cover,
 						content:this.content,
+						studentid:this.studentid,
+						goods: this.goods._id || null
 					})
 					if(res === 'suceess'){
 						uni.showToast({
@@ -127,10 +164,20 @@
 					})
 				}
 			},
+			async getmysell(){
+				let res = await user.getmysell({id:this.studentid})
+				console.log(res)
+				res.forEach(item=>{
+					if(item.state === 'selling'){
+						this.mysell.push(item)
+					}
+				})
+			},
 			getEditorContent(e) {
 				this.content = e.detail.html;
 			},
 			goToBack(){
+				
 				uni.navigateBack({
 					delta: 1
 				});
@@ -255,16 +302,81 @@
 						})
 					}
 				})
+			},
+			insertGoods(goods){
+				this.goods = goods
+				this.goodsPop = false
 			}
 		}
 	}
 </script>
 
 <style scoped>
+	.goods-list{
+		transition-duration: 300ms;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		height: 400px;
+		width: 100%;
+		background-color: white;
+		border-radius: 16px;
+		box-shadow: 0 0 6px lightgray;
+		display: flex;
+		flex-direction: column;
+		padding: 20px;
+		box-sizing: border-box;
+	}
+	.goods-list .goods-head{
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 10px;
+	}
+	.goods-list .body{
+		flex: 1;
+		overflow-y: scroll;
+	}
+	.body .goods-item{
+		border-radius: 8px;
+		margin: 0 6px;
+		width: calc(100% - 12px);
+		box-sizing: border-box;
+		display: flex;
+		padding: 8px;
+		margin-top: 8px;
+		box-shadow: 0 0 6px lightgray;
+	}
+	.goods-item .insert-goods{
+		display: flex;
+		align-items: center;
+		margin-right: 10px;
+	}
+	.goods-item .image{
+		width: 80px;
+		height: 80px;
+		border-radius: 8px;
+		margin-right: 10px;
+	}
+	.goods-item .text{
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.goods-item .text .goods-name{
+		font-size: 18px;
+		margin-top: 6px;
+	}
+	.goods-item .text .goods-price{
+		font-size: 20px;
+		color: #ec410d;
+	}
 	.out-box{
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
+		overflow: hidden;
 	}
 	.head{
 		height: 80px;
@@ -325,6 +437,40 @@
 		height: calc(100% - 20px);
 		padding: 10px;
 		width: calc(100% - 20px);
+	}
+	.cont .goods{
+		display: flex;
+	}
+	.goods .cover{
+		height: 100px;
+		width: 100px;
+		border-radius: 10px;
+		margin-right: 10px;
+	}
+	.goods .text{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.goods .text .goods-name{
+		margin-top: 8px;
+		font-size: 20px;
+	}
+	.goods .text .goods-price{
+		color: #ec410d;
+		font-weight: bold;
+		font-size: 24px;
+	}
+	.goods .buy{
+		margin-top: 20px;
+		margin-left: auto;
+	}
+	.buy .inner{
+		padding: 10px 20px;
+		display: inline-block;
+		border-radius: 20px;
+		color: white;
+		background-color: #B5B5FF;
 	}
 	.toolbar {
 		margin-top: 10px;

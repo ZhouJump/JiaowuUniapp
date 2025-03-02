@@ -1,6 +1,5 @@
 <template>
 	<view class="page">
-		<uni-pay ref="pay" height="70vh" @success="success" @fail="fail" logo="/static/logo.png"></uni-pay>
 		<view class="topbox">
 			<view class="title">订单详情</view>
 		</view>
@@ -13,8 +12,8 @@
 				<view @click="alipay" class="alipay">立即支付 <i class="bi bi-cart-check-fill"></i></view>
 				<!-- <view class="wechat">微信支付 <i class="bi bi-wechat"></i></view> -->
 			</view>
-			<uni-pay @cancel="payCancel" @fail="payfail" @success="paySuccess" ref="pay"></uni-pay>
 		</view>
+		<uni-pay @cancel="payCancel" @fail="payfail" @success="paySuccess" ref="pay"></uni-pay>
 	</view>
 </template>
 
@@ -46,6 +45,7 @@
 				}
 			},
 			 paySuccess(){
+				 console.log('pay success')
 				 uni.navigateTo({
 					url:'/pages/apps/ershou/ershou'
 				})
@@ -111,10 +111,10 @@
 			 // }
 		},
 		mounted() {
-			this.getgoods()
+			
 		},
 		onLoad(e) {
-			
+			this.getgoods(e.id)
 		},
 		onShow(){
 			this.getOrder()
