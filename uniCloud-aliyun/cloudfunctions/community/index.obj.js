@@ -5,6 +5,52 @@ module.exports = {
 
 	},
 	
+	async getNicknameList(){
+		const db= uniCloud.database()
+		let ret = await db.collection('nickname')
+		.doc("680ce945f2949c1a83f35ee8")
+		.get()
+		return ret
+	},
+	
+	async setNicknameList(first_name,last_name){
+		const db= uniCloud.database()
+		let ret = await db.collection('nickname')
+		.doc("680ce945f2949c1a83f35ee8")
+		.update({
+			first_name:first_name,
+			last_name:last_name
+		})
+		return ret
+	},
+	
+	async getNoteAdmin(){
+		const db= uniCloud.database()
+		const $ = db.command.aggregate
+		const now = Date.now() * -1
+		return await db.collection('noteTable').aggregate()
+		.match({
+			title: db.command.exists(true),
+		})
+		.addFields({
+		    sortWeight: $.add([$.multiply(['$view',1]),$.multiply([$.size('$comment'),4]),$.multiply(['$like',4]),$.multiply([$.add([now,'$date']),0.0000001])]) 
+		})
+		.sort({
+		    sortWeight: -1,
+		})
+		.project({
+		    'title': 1,
+		    'view': 1,
+		    'cover': 1,
+		    'comment': 1,
+			'like': 1,
+			'sortWeight': 1,
+			'date': 1,
+			'studentid':1
+		})
+		.end()
+	},
+	
 	async getNoteByUserId(id){
 		const db= uniCloud.database()
 		const $ = db.command.aggregate

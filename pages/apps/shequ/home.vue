@@ -49,7 +49,8 @@
 		},
 		onLoad() {
 			this.getAllNote()
-			// this.checklogin()
+			this.checklogin()
+			this.getNickNameList()
 		},
 		methods: {
 			gotoMyInfo(){
@@ -61,6 +62,11 @@
 				uni.navigateTo({
 					url:url
 				})
+			},
+			async getNickNameList(){
+				let res = await community.getNicknameList()
+				console.log(res.data)
+				uni.setStorageSync('nicknameList',res.data[0])
 			},
 			async refresh(){
 				this.refresher = true

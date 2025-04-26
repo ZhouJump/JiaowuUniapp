@@ -27,7 +27,7 @@
 				  {name:'校园社区',ico:'bi-chat-quote-fill',url:'shequ/home',color:'#29c25c'},
 				  {name:'二手交易',ico:'bi-bag-fill',url:'ershou/ershou',color:'#e4de16'},
 				  {name:'简历编辑器',ico:'bi-file-person-fill',url:'webview?url=http666https://resume.zhoujump.club/',color:'#0C9371'},
-				  {name:'小组件管理',ico:'bi-map-fill',url:'zujian',color:'#4CAAE4'},
+				  {name:'小组件管理',ico:'bi-map-fill',url:'zujian',color:'#4CAAE4'}
 						],
 
 

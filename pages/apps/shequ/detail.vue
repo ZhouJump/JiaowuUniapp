@@ -79,7 +79,8 @@
 				studentid:uni.getStorageSync('userid')
 			}
 		},
-		onLoad(event) {
+		 onLoad(event) {
+			// this.getNickNameList()
 			this.getNote(event.id)
 		},
 		methods: {
@@ -117,8 +118,8 @@
 				})
 			},
 			getName(noteId,userId){
-				let name_1 = ['双层','奶油','麻辣','酱香','吮指','美味']
-				let name_2 = ['奥利奥','趣多多','脆脆鲨','奇趣蛋','原味鸡','麦满分','酱香饼','鸡蛋仔','铜锣烧','冰激凌','脆升升','星球杯','冰美式']
+				let name_1 = uni.getStorageSync('nicknameList').first_name
+				let name_2 = uni.getStorageSync('nicknameList').last_name
 				let token = (userId-0) * noteId.slice(-1).charCodeAt() * noteId.slice(-2).charCodeAt()
 				return name_1[token % name_1.length] + name_2[token % name_2.length]
 			},
